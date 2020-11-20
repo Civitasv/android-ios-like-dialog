@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_window_focused="false">
+        <shape android:shape="rectangle">
+            <!--填充颜色-->
+            <solid android:color="@color/dialog_normal_bg" />
+            <!-- 圆角 -->
+            <corners android:bottomRightRadius="15dp" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <!--填充颜色-->
+            <solid android:color="@color/dialog_normal_press" />
+            <!-- 圆角 -->
+            <corners android:bottomRightRadius="15dp" />
+        </shape>
+    </item>
+</selector>

@@ -120,11 +120,11 @@ public class DialogBottom {
     /**
      * 添加条目
      *
-     * @param item 条目
+     * @param resId 条目
      * @return 弹窗对象
      */
-    public DialogBottom addBottomItem(int item) {
-        String text = mContext.getResources().getString(item);
+    public DialogBottom addBottomItem(int resId) {
+        String text = mContext.getResources().getString(resId);
         if (text == null)
             throw new NullPointerException();
         return addBottomItem(new DialogText(text));
@@ -146,12 +146,12 @@ public class DialogBottom {
     /**
      * 添加条目
      *
-     * @param item            条目
+     * @param resId            条目
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogBottom addBottomItem(int item, View.OnClickListener onClickListener) {
-        String text = mContext.getResources().getString(item);
+    public DialogBottom addBottomItem(int resId, View.OnClickListener onClickListener) {
+        String text = mContext.getResources().getString(resId);
         if (text == null || onClickListener == null)
             throw new NullPointerException();
         return addBottomItem(new DialogText(text, onClickListener));
@@ -173,12 +173,12 @@ public class DialogBottom {
     /**
      * 添加条目
      *
-     * @param item      条目
+     * @param resId      条目
      * @param itemStyle 条目样式
      * @return 弹窗对象
      */
-    public DialogBottom addBottomItem(int item, DialogTextStyle itemStyle) {
-        String text = mContext.getResources().getString(item);
+    public DialogBottom addBottomItem(int resId, DialogTextStyle itemStyle) {
+        String text = mContext.getResources().getString(resId);
         if (text == null || itemStyle == null)
             throw new NullPointerException();
         return addBottomItem(new DialogText(text, null, itemStyle));
@@ -201,13 +201,13 @@ public class DialogBottom {
     /**
      * 添加条目
      *
-     * @param item            条目内容
+     * @param resId            条目内容
      * @param onClickListener 点击事件
      * @param itemStyle       条目样式
      * @return 弹窗对象
      */
-    public DialogBottom addBottomItem(int item, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
-        String text = mContext.getResources().getString(item);
+    public DialogBottom addBottomItem(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        String text = mContext.getResources().getString(resId);
         if (text == null || itemStyle == null || onClickListener == null)
             throw new NullPointerException();
         return addBottomItem(new DialogText(text, onClickListener, itemStyle));
@@ -228,11 +228,11 @@ public class DialogBottom {
     /**
      * 设置标题
      *
-     * @param title 标题
+     * @param resId 标题
      * @return 弹窗对象
      */
-    public DialogBottom setTitle(int title) {
-        String text = mContext.getResources().getString(title);
+    public DialogBottom setTitle(int resId) {
+        String text = mContext.getResources().getString(resId);
         if (text == null)
             throw new NullPointerException();
         return setTitle(new DialogText(text));
@@ -254,12 +254,12 @@ public class DialogBottom {
     /**
      * 设置标题
      *
-     * @param title           标题
+     * @param resId           标题
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogBottom setTitle(int title, View.OnClickListener onClickListener) {
-        String text = mContext.getResources().getString(title);
+    public DialogBottom setTitle(int resId, View.OnClickListener onClickListener) {
+        String text = mContext.getResources().getString(resId);
         if (text == null || onClickListener == null)
             throw new NullPointerException();
         return setTitle(new DialogText(text, onClickListener));
@@ -281,12 +281,12 @@ public class DialogBottom {
     /**
      * 设置标题
      *
-     * @param title     标题
+     * @param resId     标题
      * @param itemStyle 样式
      * @return 弹窗对象
      */
-    public DialogBottom setTitle(int title, DialogTextStyle itemStyle) {
-        String text = mContext.getResources().getString(title);
+    public DialogBottom setTitle(int resId, DialogTextStyle itemStyle) {
+        String text = mContext.getResources().getString(resId);
         if (text == null || itemStyle == null)
             throw new NullPointerException();
         return setTitle(new DialogText(text, null, itemStyle));
@@ -310,13 +310,13 @@ public class DialogBottom {
     /**
      * 设置标题
      *
-     * @param title           标题
+     * @param resId           标题
      * @param onClickListener 点击事件
      * @param itemStyle       样式
      * @return 弹窗对象
      */
-    public DialogBottom setTitle(int title, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
-        String text = mContext.getResources().getString(title);
+    public DialogBottom setTitle(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        String text = mContext.getResources().getString(resId);
         if (text == null || itemStyle == null || onClickListener == null)
             throw new NullPointerException();
         return setTitle(new DialogText(text, onClickListener, itemStyle));
@@ -360,14 +360,14 @@ public class DialogBottom {
     /**
      * 设置取消按钮内容
      *
-     * @param cancelText 取消按钮res id
+     * @param resId 取消按钮res id
      * @return 弹窗对象
      */
-    public DialogBottom setCancel(int cancelText) {
-        String text = mContext.getResources().getString(cancelText);
+    public DialogBottom setCancel(int resId) {
+        String text = mContext.getResources().getString(resId);
         if (text == null)
             throw new NullPointerException();
-        return setCancel(new DialogText(mContext.getResources().getString(cancelText)));
+        return setCancel(new DialogText(mContext.getResources().getString(resId)));
     }
 
     /**
@@ -386,12 +386,12 @@ public class DialogBottom {
     /**
      * 设置取消按钮内容
      *
-     * @param cancelText      标题
+     * @param resId      标题
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogBottom setCancel(int cancelText, View.OnClickListener onClickListener) {
-        String text = mContext.getResources().getString(cancelText);
+    public DialogBottom setCancel(int resId, View.OnClickListener onClickListener) {
+        String text = mContext.getResources().getString(resId);
         if (text == null || onClickListener == null)
             throw new NullPointerException();
         return setCancel(new DialogText(text, onClickListener));
@@ -413,12 +413,12 @@ public class DialogBottom {
     /**
      * 设置取消按钮内容
      *
-     * @param cancelText 标题
+     * @param resId 标题
      * @param itemStyle  样式
      * @return 弹窗对象
      */
-    public DialogBottom setCancel(int cancelText, DialogTextStyle itemStyle) {
-        String text = mContext.getResources().getString(cancelText);
+    public DialogBottom setCancel(int resId, DialogTextStyle itemStyle) {
+        String text = mContext.getResources().getString(resId);
         if (text == null || itemStyle == null)
             throw new NullPointerException();
         return setCancel(new DialogText(text, null, itemStyle));
@@ -441,13 +441,13 @@ public class DialogBottom {
     /**
      * 设置取消按钮内容
      *
-     * @param cancelText      标题
+     * @param resId      标题
      * @param onClickListener 点击事件
      * @param itemStyle       样式
      * @return 弹窗对象
      */
-    public DialogBottom setCancel(int cancelText, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
-        String text = mContext.getResources().getString(cancelText);
+    public DialogBottom setCancel(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        String text = mContext.getResources().getString(resId);
         if (text == null || itemStyle == null || onClickListener == null)
             throw new NullPointerException();
         return setCancel(new DialogText(text, onClickListener, itemStyle));

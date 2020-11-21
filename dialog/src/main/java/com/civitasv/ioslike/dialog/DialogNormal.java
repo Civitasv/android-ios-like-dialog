@@ -81,11 +81,11 @@ public class DialogNormal {
     /**
      * 设置标题
      *
-     * @param title 标题
+     * @param resId 标题
      * @return 弹窗对象
      */
-    public DialogNormal setTitle(int title) {
-        return setTitle(mContext.getResources().getString(title));
+    public DialogNormal setTitle(int resId) {
+        return setTitle(mContext.getResources().getString(resId));
     }
 
     /**
@@ -104,12 +104,12 @@ public class DialogNormal {
     /**
      * 设置标题
      *
-     * @param title           标题
+     * @param resId           标题
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setTitle(int title, View.OnClickListener onClickListener) {
-        return setTitle(mContext.getResources().getString(title), onClickListener);
+    public DialogNormal setTitle(int resId, View.OnClickListener onClickListener) {
+        return setTitle(mContext.getResources().getString(resId), onClickListener);
     }
 
     /**
@@ -128,12 +128,12 @@ public class DialogNormal {
     /**
      * 设置标题
      *
-     * @param title     标题
+     * @param resId     标题
      * @param itemStyle 条目样式
      * @return 弹窗对象
      */
-    public DialogNormal setTitle(int title, DialogTextStyle itemStyle) {
-        return setTitle(mContext.getResources().getString(title), itemStyle);
+    public DialogNormal setTitle(int resId, DialogTextStyle itemStyle) {
+        return setTitle(mContext.getResources().getString(resId), itemStyle);
     }
 
     /**
@@ -153,13 +153,13 @@ public class DialogNormal {
     /**
      * 设置标题
      *
-     * @param title           标题
+     * @param resId           标题
      * @param onClickListener 点击事件
      * @param itemStyle       条目样式
      * @return 弹窗对象
      */
-    public DialogNormal setTitle(int title, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
-        return setTitle(mContext.getResources().getString(title), onClickListener, itemStyle);
+    public DialogNormal setTitle(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        return setTitle(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
     /**
@@ -199,11 +199,11 @@ public class DialogNormal {
     /**
      * 设置内容
      *
-     * @param content 弹窗内容
+     * @param resId 弹窗内容
      * @return 弹窗对象
      */
-    public DialogNormal setContent(int content) {
-        return setContent(mContext.getResources().getString(content));
+    public DialogNormal setContent(int resId) {
+        return setContent(mContext.getResources().getString(resId));
     }
 
     /**
@@ -222,12 +222,12 @@ public class DialogNormal {
     /**
      * 设置标题
      *
-     * @param content         标题
+     * @param resId           标题
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setContent(int content, View.OnClickListener onClickListener) {
-        return setContent(mContext.getResources().getString(content), onClickListener);
+    public DialogNormal setContent(int resId, View.OnClickListener onClickListener) {
+        return setContent(mContext.getResources().getString(resId), onClickListener);
     }
 
     /**
@@ -246,12 +246,12 @@ public class DialogNormal {
     /**
      * 设置标题
      *
-     * @param content   标题
+     * @param resId     标题
      * @param itemStyle 样式
      * @return 弹窗对象
      */
-    public DialogNormal setContent(int content, DialogTextStyle itemStyle) {
-        return setContent(mContext.getResources().getString(content), itemStyle);
+    public DialogNormal setContent(int resId, DialogTextStyle itemStyle) {
+        return setContent(mContext.getResources().getString(resId), itemStyle);
     }
 
     /**
@@ -271,13 +271,13 @@ public class DialogNormal {
     /**
      * 设置标题
      *
-     * @param content         标题
+     * @param resId           标题
      * @param onClickListener 点击事件
      * @param itemStyle       样式
      * @return 弹窗对象
      */
-    public DialogNormal setContent(int content, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
-        return setContent(mContext.getResources().getString(content), onClickListener, itemStyle);
+    public DialogNormal setContent(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        return setContent(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
     /**
@@ -317,11 +317,11 @@ public class DialogNormal {
     /**
      * 设置取消按钮内容
      *
-     * @param cancelText 取消按钮res id
+     * @param resId 取消按钮res id
      * @return 弹窗对象
      */
-    public DialogNormal setCancel(int cancelText) {
-        return setCancel(mContext.getResources().getString(cancelText));
+    public DialogNormal setCancel(int resId) {
+        return setCancel(mContext.getResources().getString(resId));
     }
 
     /**
@@ -341,12 +341,12 @@ public class DialogNormal {
     /**
      * 设置取消按钮内容
      *
-     * @param cancelText      标题
+     * @param resId           标题
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setCancel(int cancelText, View.OnClickListener onClickListener) {
-        return setCancel(mContext.getResources().getString(cancelText), onClickListener);
+    public DialogNormal setCancel(int resId, View.OnClickListener onClickListener) {
+        return setCancel(mContext.getResources().getString(resId), onClickListener);
     }
 
     /**
@@ -365,12 +365,12 @@ public class DialogNormal {
     /**
      * 设置取消按钮内容
      *
-     * @param cancelText 标题
-     * @param itemStyle  样式
+     * @param resId     标题
+     * @param itemStyle 样式
      * @return 弹窗对象
      */
-    public DialogNormal setCancel(int cancelText, DialogTextStyle itemStyle) {
-        return setCancel(mContext.getResources().getString(cancelText), itemStyle);
+    public DialogNormal setCancel(int resId, DialogTextStyle itemStyle) {
+        return setCancel(mContext.getResources().getString(resId), itemStyle);
     }
 
     /**
@@ -390,13 +390,13 @@ public class DialogNormal {
     /**
      * 设置取消按钮内容
      *
-     * @param cancelText      标题
+     * @param resId           标题
      * @param onClickListener 点击事件
      * @param itemStyle       样式
      * @return 弹窗对象
      */
-    public DialogNormal setCancel(int cancelText, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
-        return setCancel(mContext.getResources().getString(cancelText), onClickListener, itemStyle);
+    public DialogNormal setCancel(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        return setCancel(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
     /**
@@ -435,11 +435,11 @@ public class DialogNormal {
     /**
      * 设置确定按钮内容
      *
-     * @param confirmText 确定内容的res id
+     * @param resId 确定内容的res id
      * @return 弹窗对象
      */
-    public DialogNormal setConfirm(int confirmText) {
-        return setConfirm(mContext.getResources().getString(confirmText));
+    public DialogNormal setConfirm(int resId) {
+        return setConfirm(mContext.getResources().getString(resId));
     }
 
     /**
@@ -458,12 +458,12 @@ public class DialogNormal {
     /**
      * 设置确定按钮内容
      *
-     * @param confirmText     标题
+     * @param resId           标题
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setConfirm(int confirmText, View.OnClickListener onClickListener) {
-        return setConfirm(mContext.getResources().getString(confirmText), onClickListener);
+    public DialogNormal setConfirm(int resId, View.OnClickListener onClickListener) {
+        return setConfirm(mContext.getResources().getString(resId), onClickListener);
     }
 
     /**
@@ -482,12 +482,12 @@ public class DialogNormal {
     /**
      * 设置确定按钮内容
      *
-     * @param confirmText 确定按钮内容
-     * @param itemStyle   样式
+     * @param resId     确定按钮内容
+     * @param itemStyle 样式
      * @return 弹窗对象
      */
-    public DialogNormal setConfirm(int confirmText, DialogTextStyle itemStyle) {
-        return setConfirm(mContext.getResources().getString(confirmText), itemStyle);
+    public DialogNormal setConfirm(int resId, DialogTextStyle itemStyle) {
+        return setConfirm(mContext.getResources().getString(resId), itemStyle);
     }
 
     /**
@@ -507,13 +507,13 @@ public class DialogNormal {
     /**
      * 设置确定按钮内容
      *
-     * @param confirmText     确定按钮内容
+     * @param resId           确定按钮内容
      * @param onClickListener 点击事件
      * @param itemStyle       样式
      * @return 弹窗对象
      */
-    public DialogNormal setConfirm(int confirmText, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
-        return setConfirm(mContext.getResources().getString(confirmText), onClickListener, itemStyle);
+    public DialogNormal setConfirm(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        return setConfirm(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
     /**

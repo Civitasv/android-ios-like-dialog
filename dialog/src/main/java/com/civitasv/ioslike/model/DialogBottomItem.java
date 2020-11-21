@@ -8,7 +8,7 @@ import android.view.View;
  * 底部弹窗条目
  * 2020-11-21
  */
-public class DialogBottomItem {
+public final class DialogBottomItem {
     private final String text; // 内容
 
     private final View.OnClickListener onClickListener; // 点击事件

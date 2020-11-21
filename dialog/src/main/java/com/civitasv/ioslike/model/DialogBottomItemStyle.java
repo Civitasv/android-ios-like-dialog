@@ -9,7 +9,7 @@ import android.graphics.Typeface;
  * 底部弹窗条目样式 构造者模式
  * 2020-11-21
  */
-public class DialogBottomItemStyle {
+public final class DialogBottomItemStyle {
     private final int color; // 颜色
 
     private final int textSize; // 字大

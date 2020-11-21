@@ -3,18 +3,18 @@
     <item android:state_window_focused="false">
         <shape android:shape="rectangle">
             <!--填充颜色-->
-            <solid android:color="@color/ios_like_grey6" />
+            <solid android:color="@color/white" />
             <!-- 圆角 -->
-            <corners android:bottomRightRadius="15dp" />
+            <corners android:bottomRightRadius="10dp" android:bottomLeftRadius="10dp"/>
         </shape>
     </item>
 
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <!--填充颜色-->
-            <solid android:color="@color/ios_like_grey3" />
+            <solid android:color="@color/ios_like_grey5" />
             <!-- 圆角 -->
-            <corners android:bottomRightRadius="15dp" />
+            <corners android:bottomRightRadius="10dp" android:bottomLeftRadius="10dp"/>
         </shape>
     </item>
 </selector>

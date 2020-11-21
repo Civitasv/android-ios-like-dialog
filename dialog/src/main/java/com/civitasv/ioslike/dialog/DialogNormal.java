@@ -16,13 +16,12 @@ import com.civitasv.dialog.R;
 import com.civitasv.ioslike.util.DisplayUtil;
 
 /**
- * @author civitasv
+ * @author Civitasv
  * 仿ios普通弹出框
  * 2020-11-20
  */
 public class DialogNormal {
     // 必须参数
-    private final View view;
     private final Context mContext;
     private final Dialog mDialog;
 
@@ -34,14 +33,20 @@ public class DialogNormal {
 
     private boolean mShowTitle = false;
     private boolean mShowContent = false;
-    private boolean mShowCancel = false;
-    private boolean mShowConfirm = false;
+    private boolean mShowCancel = true;
+    private boolean mShowConfirm = true;
 
+    /**
+     * 构造方法
+     *
+     * @param context 上下文
+     */
     public DialogNormal(Context context) {
         mContext = context;
         // 获取Dialog布局
-        view = View.inflate(context, R.layout.dialog_normal, null);
+        View view = View.inflate(context, R.layout.dialog_normal, null);
 
+        // 初始化
         mTitle = view.findViewById(R.id.title);
         mContent = view.findViewById(R.id.content);
         mCancel = view.findViewById(R.id.cancel);
@@ -52,98 +57,153 @@ public class DialogNormal {
         Window dialogWindow = mDialog.getWindow();
         if (dialogWindow == null) return;
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        // 设置宽度、高度、居中
         lp.width = (int) (DisplayUtil.getInstance(context).getScreenWidth() * 0.75);
         lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
         lp.gravity = Gravity.CENTER;
         dialogWindow.setAttributes(lp);
     }
 
+    /**
+     * 设置标题
+     *
+     * @param title 标题
+     * @return 弹窗对象
+     */
     public DialogNormal setTitle(String title) {
         mTitle.setText(title);
         mShowTitle = true;
         return this;
     }
 
+    /**
+     * 设置内容
+     *
+     * @param content 弹窗内容
+     * @return 弹窗对象
+     */
     public DialogNormal setContent(String content) {
         mContent.setText(content);
         mShowContent = true;
         return this;
     }
 
-    public DialogNormal setCancel(String cancel) {
-        mCancel.setText(cancel);
-        mCancel.setOnClickListener(v -> mDialog.dismiss());
-        mShowCancel = true;
+    /**
+     * 设置取消按钮内容
+     *
+     * @param cancelText 取消按钮字符串内容
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancelText(String cancelText) {
+        mCancel.setText(cancelText);
         return this;
     }
 
-    public DialogNormal setCancel(String cancel, View.OnClickListener listener) {
-        mCancel.setText(cancel);
-        mCancel.setOnClickListener(v -> {
-            listener.onClick(v);
-            mDialog.dismiss();
-        });
-        mShowCancel = true;
+    /**
+     * 设置取消按钮内容
+     *
+     * @param cancelText 取消按钮res id
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancelText(int cancelText) {
+        mCancel.setText(cancelText);
         return this;
     }
 
-    public DialogNormal setCancelListener(View.OnClickListener listener) {
-        mCancel.setText("取消");
-        mCancel.setOnClickListener(v -> {
-            listener.onClick(v);
-            mDialog.dismiss();
-        });
-        mShowCancel = true;
+    /**
+     * 取消按钮点击事件
+     *
+     * @param listener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setOnCancelClickListener(View.OnClickListener listener) {
+        mCancel.setOnClickListener(listener);
         return this;
     }
 
+    /**
+     * 取消按钮颜色
+     *
+     * @param cancelTextColor 取消按钮res id颜色
+     * @return 弹窗对象
+     */
     public DialogNormal setCancelTextColor(int cancelTextColor) {
         mCancel.setTextColor(cancelTextColor);
         return this;
     }
 
+    /**
+     * 取消按钮颜色
+     *
+     * @param cancelTextColor 取消按钮字符串颜色
+     * @return 弹窗对象
+     */
     public DialogNormal setCancelTextColor(String cancelTextColor) {
         mCancel.setTextColor(Color.parseColor(cancelTextColor));
         return this;
     }
 
-    public DialogNormal setConfirm(String confirm) {
-        mConfirm.setText(confirm);
-        mConfirm.setOnClickListener(v -> mDialog.dismiss());
-        mShowConfirm = true;
+    /**
+     * 设置确定按钮文字
+     *
+     * @param confirmText 确定字符串文字
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirmText(String confirmText) {
+        mConfirm.setText(confirmText);
         return this;
     }
 
-    public DialogNormal setConfirm(String confirm, View.OnClickListener listener) {
-        mConfirm.setText(confirm);
-        mConfirm.setOnClickListener(v -> {
-            listener.onClick(v);
-            mDialog.dismiss();
-        });
-        mShowConfirm = true;
+    /**
+     * 设置确定按钮文字
+     *
+     * @param confirmText 确定内容的res id
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirmText(int confirmText) {
+        mConfirm.setText(confirmText);
         return this;
     }
 
-    public DialogNormal setConfirmListener(View.OnClickListener listener) {
-        mConfirm.setText("确定");
-        mConfirm.setOnClickListener(v -> {
-            listener.onClick(v);
-            mDialog.dismiss();
-        });
-        mShowConfirm = true;
+    /**
+     * 确定按钮点击事件
+     *
+     * @param listener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setOnConfirmClickListener(View.OnClickListener listener) {
+        mConfirm.setOnClickListener(listener);
         return this;
     }
 
+    /**
+     * 设置确定按钮颜色
+     *
+     * @param cancelTextColor 确定按钮颜色res id
+     * @return 弹窗对象
+     */
     public DialogNormal setConfirmTextColor(int cancelTextColor) {
         mConfirm.setTextColor(cancelTextColor);
         return this;
     }
 
+    /**
+     * 设置确定按钮颜色
+     *
+     * @param cancelTextColor 确定按钮字符串颜色
+     * @return 弹窗对象
+     */
     public DialogNormal setConfirmTextColor(String cancelTextColor) {
         mConfirm.setTextColor(Color.parseColor(cancelTextColor));
         return this;
     }
 
+    /**
+     * 设置弹窗宽度所占比例
+     *
+     * @param widthRatio 宽度比例
+     * @return 弹窗对象
+     */
     public DialogNormal setWidthRatio(float widthRatio) {
         Window dialogWindow = mDialog.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
@@ -152,6 +212,12 @@ public class DialogNormal {
         return this;
     }
 
+    /**
+     * 设置弹窗高度所占比例
+     *
+     * @param heightRatio 高度比例
+     * @return 弹窗对象
+     */
     public DialogNormal setHeightRatio(float heightRatio) {
         Window dialogWindow = mDialog.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
@@ -160,16 +226,53 @@ public class DialogNormal {
         return this;
     }
 
+    /**
+     * 设置弹窗是否可以使用返回键消失
+     *
+     * @param cancelable true: 可以使用返回键使其消失 反正不可以
+     * @return 弹窗对象
+     */
     public DialogNormal setCancelable(boolean cancelable) {
         mDialog.setCancelable(cancelable);
         return this;
     }
 
+    /**
+     * 设置点击外部区域，弹窗是否消失
+     *
+     * @param canceledOnTouchOutside true： 点击外部区域，弹窗消失 反正不消失
+     * @return 弹窗对象
+     */
     public DialogNormal setCanceledOnTouchOutside(boolean canceledOnTouchOutside) {
         mDialog.setCanceledOnTouchOutside(canceledOnTouchOutside);
         return this;
     }
 
+    /**
+     * 设置取消按钮可见性
+     *
+     * @param mShowCancel 取消按钮可见性
+     * @return 弹窗对象
+     */
+    public DialogNormal setShowCancel(boolean mShowCancel) {
+        this.mShowCancel = mShowCancel;
+        return this;
+    }
+
+    /**
+     * 设置确定按钮可见性
+     *
+     * @param mShowConfirm 确定按钮可见性
+     * @return 弹窗对象
+     */
+    public DialogNormal setShowConfirm(boolean mShowConfirm) {
+        this.mShowConfirm = mShowConfirm;
+        return this;
+    }
+
+    /**
+     * 设置可见性，并展示该弹窗
+     */
     public void show() {
         mTitle.setVisibility(mShowTitle ? View.VISIBLE : View.GONE);
         mContent.setVisibility(mShowContent ? View.VISIBLE : View.GONE);
@@ -182,7 +285,6 @@ public class DialogNormal {
         if (!mShowCancel && mShowConfirm) {
             mConfirm.setBackground(ContextCompat.getDrawable(mContext, R.drawable.dialog_normal_btn_single));
         }
-        mDialog.setContentView(view);
         mDialog.show();
     }
 }

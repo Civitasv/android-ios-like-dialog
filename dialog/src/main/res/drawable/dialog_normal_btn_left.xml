@@ -3,7 +3,7 @@
     <item android:state_window_focused="false">
         <shape android:shape="rectangle">
             <!--填充颜色-->
-            <solid android:color="@color/dialog_normal_bg" />
+            <solid android:color="@color/ios_like_grey6" />
             <!-- 圆角 -->
             <corners android:bottomLeftRadius="15dp" />
         </shape>
@@ -12,7 +12,7 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
             <!--填充颜色-->
-            <solid android:color="@color/dialog_normal_press" />
+            <solid android:color="@color/ios_like_grey3" />
             <!-- 圆角 -->
             <corners android:bottomLeftRadius="15dp" />
         </shape>

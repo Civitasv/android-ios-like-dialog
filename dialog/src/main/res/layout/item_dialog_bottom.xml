@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialog_bottom_item_middle_btn"
+        android:gravity="center"
+        android:stateListAnimator="@null"
+        android:textColor="@color/ios_like_blue"
+        android:textSize="16sp"/>
+</LinearLayout>

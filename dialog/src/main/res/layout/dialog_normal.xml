@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginTop="10dp"
-        android:background="@color/dialog_normal_line" />
+        android:background="@color/ios_like_grey" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,31 +42,34 @@
         <Button
             android:id="@+id/cancel"
             android:layout_width="wrap_content"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="@drawable/dialog_normal_btn_left"
+            android:gravity="center"
             android:stateListAnimator="@null"
+            android:text="@string/cancel"
             android:textColor="@color/ios_like_red"
             android:textSize="16sp" />
 
         <View
             android:id="@+id/split"
             android:layout_width="0.5dp"
-            android:layout_height="43dp"
-            android:background="@color/dialog_normal_line" />
+            android:layout_height="match_parent"
+            android:background="@color/ios_like_grey3" />
 
         <Button
             android:id="@+id/confirm"
             android:layout_width="wrap_content"
-            android:layout_height="43dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@drawable/dialog_normal_btn_right"
             android:gravity="center"
             android:stateListAnimator="@null"
+            android:text="@string/confirm"
             android:textColor="@color/ios_like_blue"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
+
 
 </LinearLayout>

@@ -6,7 +6,7 @@
 
 使用方式：
 ```java
-implementation 'com.civitasv.iosLike:dialog:0.1.1'
+implementation 'com.civitasv.iosLike:dialog:0.1.2'
 ```
 #### 1.1 普通弹窗
 
@@ -14,10 +14,13 @@ implementation 'com.civitasv.iosLike:dialog:0.1.1'
 
 ```java
 new DialogNormal(this)
-        .setCancel("取消")
-        .setConfirm("确定")
-        .setTitle("标题")
-        .setContent("内容")
+        .setTitle("标题", new DialogTextStyle.Builder()
+                .color(getResources().getColor(R.color.ios_like_red))
+                .textSize(18)
+                .typeface(Typeface.create(Typeface.MONOSPACE, Typeface.BOLD_ITALIC)).build())
+        .setContent("内容", content -> {
+            Toast.makeText(this, "点击内容", Toast.LENGTH_LONG).show();
+        })
         .setCanceledOnTouchOutside(false)
         .show();
 ````
@@ -38,7 +41,7 @@ dialogBottoms = new DialogBottom(this)
         .addBottomItem("删除照片")
         .addBottomItem("添加照片")
         .addBottomItem("点击事件", v1 -> dialogBottoms.dismiss())
-        .addBottomItem("颜色样式", new DialogBottomItemStyle.Builder()
+        .addBottomItem("颜色样式", new DialogTextStyle.Builder()
                 .color(getResources().getColor(R.color.ios_like_red))
                 .textSize(18)
                 .typeface(Typeface.create(Typeface.MONOSPACE, Typeface.BOLD_ITALIC)).build());

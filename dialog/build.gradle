@@ -71,11 +71,11 @@ tasks.withType(Javadoc) {
 }
 
 publish {
-    repoName = 'iosLike'
-    userOrg = 'civitasv'
-    groupId = 'com.civitasv.iosLike'
-    artifactId = 'dialog'
-    publishVersion = '0.1'
+    repoName = 'iosLike' // repository name
+    userOrg = 'civitasv' // user name
+    groupId = 'com.civitasv.iosLike' // 到repository一级的域名
+    artifactId = 'dialog' // package name
+    publishVersion = '0.1' // version
     desc = '仿IOS制作的Android组件'
     website = 'https://github.com/Civitasv/iosLike'
 }

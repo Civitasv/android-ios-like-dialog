@@ -6,8 +6,8 @@ import android.view.WindowManager;
 
 /**
  * @author 胡森
- * @description 界面大小
- * @date 2020-11-20
+ * 界面大小
+ * 2020-11-20
  */
 public class DisplayUtil {
     private static DisplayUtil instance;

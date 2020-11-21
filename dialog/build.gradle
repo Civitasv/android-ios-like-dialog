@@ -1,0 +1,82 @@
+plugins{
+    id('com.android.library')
+    id('maven-publish')
+    id('com.github.panpf.bintray-publish' )
+    id('com.jfrog.bintray')
+}
+
+task sourceJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier "sources"
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
+
+publishing  {
+    publications {
+        iosLike(MavenPublication) {
+            groupId 'com.civitasv.iosLike'
+            artifactId 'dialog'
+            version '0.1'
+            artifact(sourceJar)
+            artifact("$buildDir/outputs/aar/dialog-release.aar")
+        }
+    }
+    repositories {
+        maven {
+            url "$buildDir/repo"
+        }
+    }
+}
+
+tasks.withType(Javadoc) {
+    options{ encoding "UTF-8"
+        charSet 'UTF-8'
+        links "http://docs.oracle.com/javase/7/docs/api"
+    }
+}
+
+publish {
+    repoName = 'iosLike'
+    userOrg = 'civitasv'
+    groupId = 'com.civitasv.iosLike'
+    artifactId = 'dialog'
+    publishVersion = '0.1'
+    desc = '仿IOS制作的Android组件'
+    website = 'https://github.com/Civitasv/iosLike'
+}
+

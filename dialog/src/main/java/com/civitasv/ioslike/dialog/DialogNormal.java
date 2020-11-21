@@ -8,18 +8,17 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-import com.civitasv.ioslike.R;
+import com.civitasv.dialog.R;
 import com.civitasv.ioslike.util.DisplayUtil;
 
 /**
  * @author civitasv
- * @description 仿ios普通弹出框
- * @date 2020-11-20
+ * 仿ios普通弹出框
+ * 2020-11-20
  */
 public class DialogNormal {
     // 必须参数

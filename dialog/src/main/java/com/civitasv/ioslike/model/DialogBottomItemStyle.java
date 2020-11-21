@@ -6,15 +6,15 @@ import android.graphics.Typeface;
 
 /**
  * @author Civitasv
- * 底部弹窗条目样式
+ * 底部弹窗条目样式 构造者模式
  * 2020-11-21
  */
 public class DialogBottomItemStyle {
-    private int color; // 颜色
+    private final int color; // 颜色
 
-    private int textSize; // 字大
+    private final int textSize; // 字大
 
-    private Typeface typeface; // 样式
+    private final Typeface typeface; // 样式
 
     public static class Builder {
         // 可选参数
@@ -61,23 +61,11 @@ public class DialogBottomItemStyle {
         return color;
     }
 
-    public void setColor(int color) {
-        this.color = color;
-    }
-
     public int getTextSize() {
         return textSize;
     }
 
-    public void setTextSize(int textSize) {
-        this.textSize = textSize;
-    }
-
     public Typeface getTypeface() {
         return typeface;
-    }
-
-    public void setTypeface(Typeface typeface) {
-        this.typeface = typeface;
     }
 }

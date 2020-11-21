@@ -71,6 +71,8 @@ public class DialogNormal {
      * @return 弹窗对象
      */
     public DialogNormal setTitle(String title) {
+        if (title == null)
+            throw new NullPointerException("title can't be null!");
         mTitle.setText(title);
         mShowTitle = true;
         return this;
@@ -83,6 +85,8 @@ public class DialogNormal {
      * @return 弹窗对象
      */
     public DialogNormal setContent(String content) {
+        if (content == null)
+            throw new NullPointerException("content can't be null!");
         mContent.setText(content);
         mShowContent = true;
         return this;
@@ -95,6 +99,8 @@ public class DialogNormal {
      * @return 弹窗对象
      */
     public DialogNormal setCancelText(String cancelText) {
+        if (cancelText == null)
+            throw new NullPointerException("cancelText can't be null!");
         mCancel.setText(cancelText);
         return this;
     }
@@ -117,6 +123,8 @@ public class DialogNormal {
      * @return 弹窗对象
      */
     public DialogNormal setOnCancelClickListener(View.OnClickListener listener) {
+        if (listener == null)
+            throw new NullPointerException("listener can't be null!");
         mCancel.setOnClickListener(listener);
         return this;
     }
@@ -139,6 +147,8 @@ public class DialogNormal {
      * @return 弹窗对象
      */
     public DialogNormal setCancelTextColor(String cancelTextColor) {
+        if (cancelTextColor == null)
+            throw new NullPointerException("cancelTextColor can't be null!");
         mCancel.setTextColor(Color.parseColor(cancelTextColor));
         return this;
     }
@@ -150,6 +160,8 @@ public class DialogNormal {
      * @return 弹窗对象
      */
     public DialogNormal setConfirmText(String confirmText) {
+        if (confirmText == null)
+            throw new NullPointerException("confirmText can't be null!");
         mConfirm.setText(confirmText);
         return this;
     }
@@ -172,6 +184,8 @@ public class DialogNormal {
      * @return 弹窗对象
      */
     public DialogNormal setOnConfirmClickListener(View.OnClickListener listener) {
+        if (listener == null)
+            throw new NullPointerException("listener can't be null!");
         mConfirm.setOnClickListener(listener);
         return this;
     }
@@ -194,6 +208,8 @@ public class DialogNormal {
      * @return 弹窗对象
      */
     public DialogNormal setConfirmTextColor(String cancelTextColor) {
+        if (cancelTextColor == null)
+            throw new NullPointerException("cancelTextColor can't be null!");
         mConfirm.setTextColor(Color.parseColor(cancelTextColor));
         return this;
     }
@@ -267,6 +283,28 @@ public class DialogNormal {
      */
     public DialogNormal setShowConfirm(boolean mShowConfirm) {
         this.mShowConfirm = mShowConfirm;
+        return this;
+    }
+
+    /**
+     * 设置标题可见性
+     *
+     * @param mShowTitle 标题可见性
+     * @return 弹窗对象
+     */
+    public DialogNormal setShowTitle(boolean mShowTitle) {
+        this.mShowTitle = mShowTitle;
+        return this;
+    }
+
+    /**
+     * 设置内容可见性
+     *
+     * @param mShowContent 内容可见性
+     * @return 弹窗对象
+     */
+    public DialogNormal setShowContent(boolean mShowContent) {
+        this.mShowContent = mShowContent;
         return this;
     }
 

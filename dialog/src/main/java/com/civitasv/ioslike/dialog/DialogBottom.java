@@ -86,6 +86,8 @@ public class DialogBottom {
      * @return 弹窗对象
      */
     public DialogBottom setBottomList(List<DialogBottomItem> items) {
+        if (items == null)
+            throw new NullPointerException("items can't be null!");
         mAdapter.setItems(items);
         return this;
     }
@@ -97,6 +99,8 @@ public class DialogBottom {
      * @return 弹窗对象
      */
     public DialogBottom addBottomItem(DialogBottomItem item) {
+        if (item == null)
+            throw new NullPointerException("item can't be null!");
         mAdapter.addItem(item);
         return this;
     }
@@ -152,6 +156,8 @@ public class DialogBottom {
      * @return 弹窗对象
      */
     public DialogBottom setTitle(String title) {
+        if (title == null)
+            throw new NullPointerException("title can't be null!");
         mTitle.setText(title);
         mShowTitle = true;
         return this;
@@ -175,6 +181,8 @@ public class DialogBottom {
      * @return 弹窗对象
      */
     public DialogBottom setTitleTextColor(String titleTextColor) {
+        if (titleTextColor == null)
+            throw new NullPointerException("titleTextColor can't be null!");
         mTitle.setTextColor(Color.parseColor(titleTextColor));
         return this;
     }
@@ -186,6 +194,8 @@ public class DialogBottom {
      * @return 弹窗对象
      */
     public DialogBottom setCancelText(String cancelText) {
+        if (cancelText == null)
+            throw new NullPointerException("cancelText can't be null!");
         mCancel.setText(cancelText);
         return this;
     }
@@ -208,6 +218,8 @@ public class DialogBottom {
      * @return 弹窗对象
      */
     public DialogBottom setOnCancelClickListener(View.OnClickListener listener) {
+        if (listener == null)
+            throw new NullPointerException("listener can't be null!");
         mCancel.setOnClickListener(listener);
         return this;
     }
@@ -230,6 +242,8 @@ public class DialogBottom {
      * @return 弹窗对象
      */
     public DialogBottom setCancelTextColor(String cancelTextColor) {
+        if (cancelTextColor == null)
+            throw new NullPointerException("cancelTextColor can't be null!");
         mCancel.setTextColor(Color.parseColor(cancelTextColor));
         return this;
     }

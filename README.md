@@ -6,7 +6,7 @@
 
 使用方式：
 ```java
-implementation 'com.civitasv.iosLike:dialog:0.1'
+implementation 'com.civitasv.iosLike:dialog:0.1.1'
 ```
 #### 1.1 普通弹窗
 

@@ -29,7 +29,8 @@ public class DialogBottomAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     /**
      * 构造方法
      *
-     * @param items 列表
+     * @param context 上下文
+     * @param items   列表
      */
     public DialogBottomAdapter(Context context, List<DialogBottomItem> items) {
         mContext = context;
@@ -37,7 +38,9 @@ public class DialogBottomAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     /**
-     * 空构造方法
+     * 构造方法
+     *
+     * @param context 上下文
      */
     public DialogBottomAdapter(Context context) {
         mContext = context;

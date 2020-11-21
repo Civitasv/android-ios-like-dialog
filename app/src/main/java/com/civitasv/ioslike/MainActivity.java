@@ -5,10 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.civitasv.ioslike.dialog.DialogBottom;
 import com.civitasv.ioslike.dialog.DialogNormal;
-import com.civitasv.ioslike.model.DialogBottomItemStyle;
+import com.civitasv.ioslike.model.DialogTextStyle;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,8 +32,13 @@ public class MainActivity extends AppCompatActivity {
     private void bindOperation() {
         dialogNormal.setOnClickListener(v -> {
             new DialogNormal(this)
-                    .setTitle("标题")
-                    .setContent("内容")
+                    .setTitle("标题", new DialogTextStyle.Builder()
+                            .color(getResources().getColor(R.color.ios_like_red))
+                            .textSize(18)
+                            .typeface(Typeface.create(Typeface.MONOSPACE, Typeface.BOLD_ITALIC)).build())
+                    .setContent("内容", content -> {
+                        Toast.makeText(this, "点击内容", Toast.LENGTH_LONG).show();
+                    })
                     .setCanceledOnTouchOutside(false)
                     .show();
         });
@@ -43,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     .addBottomItem("删除照片")
                     .addBottomItem("添加照片")
                     .addBottomItem("点击事件", v1 -> dialogBottoms.dismiss())
-                    .addBottomItem("颜色样式", new DialogBottomItemStyle.Builder()
+                    .addBottomItem("颜色样式", new DialogTextStyle.Builder()
                             .color(getResources().getColor(R.color.ios_like_red))
                             .textSize(18)
                             .typeface(Typeface.create(Typeface.MONOSPACE, Typeface.BOLD_ITALIC)).build());

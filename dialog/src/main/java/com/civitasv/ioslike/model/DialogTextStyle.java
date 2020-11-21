@@ -9,7 +9,7 @@ import android.graphics.Typeface;
  * 底部弹窗条目样式 构造者模式
  * 2020-11-21
  */
-public final class DialogBottomItemStyle {
+public final class DialogTextStyle {
     private final int color; // 颜色
 
     private final int textSize; // 字大
@@ -46,12 +46,12 @@ public final class DialogBottomItemStyle {
             return this;
         }
 
-        public DialogBottomItemStyle build() {
-            return new DialogBottomItemStyle(this);
+        public DialogTextStyle build() {
+            return new DialogTextStyle(this);
         }
     }
 
-    private DialogBottomItemStyle(Builder builder) {
+    private DialogTextStyle(Builder builder) {
         color = builder.color;
         textSize = builder.textSize;
         typeface = builder.typeface;

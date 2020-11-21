@@ -11,8 +11,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.civitasv.dialog.R;
-import com.civitasv.ioslike.listener.OnItemClickListener;
-import com.civitasv.ioslike.model.DialogBottomItem;
+import com.civitasv.ioslike.model.DialogText;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ import java.util.List;
 public class DialogBottomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = "DialogBottomAdapter";
     private final Context mContext;
-    private List<DialogBottomItem> mItems;
+    private List<DialogText> mItems;
 
     /**
      * 构造方法
@@ -32,7 +31,7 @@ public class DialogBottomAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
      * @param context 上下文
      * @param items   列表
      */
-    public DialogBottomAdapter(Context context, List<DialogBottomItem> items) {
+    public DialogBottomAdapter(Context context, List<DialogText> items) {
         mContext = context;
         mItems = items;
     }
@@ -46,12 +45,14 @@ public class DialogBottomAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         mContext = context;
     }
 
-    public void setItems(List<DialogBottomItem> items) {
+    public void setItems(List<DialogText> items) {
         mItems = items;
         notifyDataSetChanged();
     }
 
-    public void addItem(DialogBottomItem item) {
+    public void addItem(DialogText item) {
+        if (item == null)
+            throw new NullPointerException();
         mItems.add(item);
         notifyItemInserted(mItems.size() - 1);
     }
@@ -67,15 +68,15 @@ public class DialogBottomAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if (mItems == null)
             return;
-        DialogBottomItem item = mItems.get(position);
+        DialogText item = mItems.get(position);
         if (item.getText() != null)
             ((ViewHolder) holder).button.setText(item.getText());
         if (item.getOnClickListener() != null)
             ((ViewHolder) holder).button.setOnClickListener(item.getOnClickListener());
-        if (item.getDialogBottomItemStyle() != null) {
-            ((ViewHolder) holder).button.setTextColor(item.getDialogBottomItemStyle().getColor());
-            ((ViewHolder) holder).button.setTextSize(item.getDialogBottomItemStyle().getTextSize());
-            ((ViewHolder) holder).button.setTypeface(item.getDialogBottomItemStyle().getTypeface());
+        if (item.getDialogTextStyle() != null) {
+            ((ViewHolder) holder).button.setTextColor(item.getDialogTextStyle().getColor());
+            ((ViewHolder) holder).button.setTextSize(item.getDialogTextStyle().getTextSize());
+            ((ViewHolder) holder).button.setTypeface(item.getDialogTextStyle().getTypeface());
         }
         if (position == getItemCount() - 1) {
             ((ViewHolder) holder).button.setBackground(ContextCompat.getDrawable(mContext, R.drawable.dialog_bottom_item_last_btn));

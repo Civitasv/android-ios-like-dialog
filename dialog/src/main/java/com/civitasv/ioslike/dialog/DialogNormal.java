@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.civitasv.dialog.R;
+import com.civitasv.ioslike.model.DialogText;
+import com.civitasv.ioslike.model.DialogTextStyle;
 import com.civitasv.ioslike.util.DisplayUtil;
 
 /**
@@ -72,8 +74,112 @@ public class DialogNormal {
      */
     public DialogNormal setTitle(String title) {
         if (title == null)
+            throw new NullPointerException();
+        return setTitle(new DialogText(title));
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title 标题
+     * @return 弹窗对象
+     */
+    public DialogNormal setTitle(int title) {
+        return setTitle(mContext.getResources().getString(title));
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title           标题
+     * @param onClickListener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setTitle(String title, View.OnClickListener onClickListener) {
+        if (title == null || onClickListener == null)
+            throw new NullPointerException();
+        return setTitle(new DialogText(title, onClickListener));
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title           标题
+     * @param onClickListener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setTitle(int title, View.OnClickListener onClickListener) {
+        return setTitle(mContext.getResources().getString(title), onClickListener);
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title     标题
+     * @param itemStyle 条目样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setTitle(String title, DialogTextStyle itemStyle) {
+        if (title == null || itemStyle == null)
+            throw new NullPointerException();
+        return setTitle(new DialogText(title, null, itemStyle));
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title     标题
+     * @param itemStyle 条目样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setTitle(int title, DialogTextStyle itemStyle) {
+        return setTitle(mContext.getResources().getString(title), itemStyle);
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title           标题
+     * @param onClickListener 点击事件
+     * @param itemStyle       条目样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setTitle(String title, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        if (title == null || itemStyle == null || onClickListener == null)
+            throw new NullPointerException();
+        return setTitle(new DialogText(title, onClickListener, itemStyle));
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title           标题
+     * @param onClickListener 点击事件
+     * @param itemStyle       条目样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setTitle(int title, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        return setTitle(mContext.getResources().getString(title), onClickListener, itemStyle);
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param title 标题
+     * @return 弹窗对象
+     */
+    public DialogNormal setTitle(DialogText title) {
+        if (title == null)
             throw new NullPointerException("title can't be null!");
-        mTitle.setText(title);
+        if (title.getText() != null)
+            mTitle.setText(title.getText());
+        if (title.getOnClickListener() != null)
+            mTitle.setOnClickListener(title.getOnClickListener());
+        if (title.getDialogTextStyle() != null) {
+            mTitle.setTextSize(title.getDialogTextStyle().getTextSize());
+            mTitle.setTextColor(title.getDialogTextStyle().getColor());
+            mTitle.setTypeface(title.getDialogTextStyle().getTypeface());
+        }
         mShowTitle = true;
         return this;
     }
@@ -86,8 +192,112 @@ public class DialogNormal {
      */
     public DialogNormal setContent(String content) {
         if (content == null)
+            throw new NullPointerException();
+        return setContent(new DialogText(content));
+    }
+
+    /**
+     * 设置内容
+     *
+     * @param content 弹窗内容
+     * @return 弹窗对象
+     */
+    public DialogNormal setContent(int content) {
+        return setContent(mContext.getResources().getString(content));
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param content         标题
+     * @param onClickListener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setContent(String content, View.OnClickListener onClickListener) {
+        if (content == null || onClickListener == null)
+            throw new NullPointerException();
+        return setContent(new DialogText(content, onClickListener));
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param content         标题
+     * @param onClickListener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setContent(int content, View.OnClickListener onClickListener) {
+        return setContent(mContext.getResources().getString(content), onClickListener);
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param content   标题
+     * @param itemStyle 样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setContent(String content, DialogTextStyle itemStyle) {
+        if (content == null || itemStyle == null)
+            throw new NullPointerException();
+        return setContent(new DialogText(content, null, itemStyle));
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param content   标题
+     * @param itemStyle 样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setContent(int content, DialogTextStyle itemStyle) {
+        return setContent(mContext.getResources().getString(content), itemStyle);
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param content         标题
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setContent(String content, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        if (content == null || itemStyle == null || onClickListener == null)
+            throw new NullPointerException();
+        return setContent(new DialogText(content, onClickListener, itemStyle));
+    }
+
+    /**
+     * 设置标题
+     *
+     * @param content         标题
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setContent(int content, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        return setContent(mContext.getResources().getString(content), onClickListener, itemStyle);
+    }
+
+    /**
+     * 设置内容
+     *
+     * @param content 弹窗内容
+     * @return 弹窗对象
+     */
+    public DialogNormal setContent(DialogText content) {
+        if (content == null)
             throw new NullPointerException("content can't be null!");
-        mContent.setText(content);
+        if (content.getText() != null)
+            mContent.setText(content.getText());
+        if (content.getOnClickListener() != null)
+            mContent.setOnClickListener(content.getOnClickListener());
+        if (content.getDialogTextStyle() != null) {
+            mContent.setTextSize(content.getDialogTextStyle().getTextSize());
+            mContent.setTextColor(content.getDialogTextStyle().getColor());
+            mContent.setTypeface(content.getDialogTextStyle().getTypeface());
+        }
         mShowContent = true;
         return this;
     }
@@ -98,11 +308,10 @@ public class DialogNormal {
      * @param cancelText 取消按钮字符串内容
      * @return 弹窗对象
      */
-    public DialogNormal setCancelText(String cancelText) {
+    public DialogNormal setCancel(String cancelText) {
         if (cancelText == null)
-            throw new NullPointerException("cancelText can't be null!");
-        mCancel.setText(cancelText);
-        return this;
+            throw new NullPointerException();
+        return setCancel(new DialogText(cancelText));
     }
 
     /**
@@ -111,45 +320,103 @@ public class DialogNormal {
      * @param cancelText 取消按钮res id
      * @return 弹窗对象
      */
-    public DialogNormal setCancelText(int cancelText) {
-        mCancel.setText(cancelText);
-        return this;
+    public DialogNormal setCancel(int cancelText) {
+        return setCancel(mContext.getResources().getString(cancelText));
     }
 
     /**
-     * 取消按钮点击事件
+     * 设置取消按钮内容
      *
-     * @param listener 点击事件
+     * @param cancelText      标题
+     * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setOnCancelClickListener(View.OnClickListener listener) {
-        if (listener == null)
-            throw new NullPointerException("listener can't be null!");
-        mCancel.setOnClickListener(listener);
-        return this;
+    public DialogNormal setCancel(String cancelText, View.OnClickListener onClickListener) {
+        if (cancelText == null || onClickListener == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText(cancelText, onClickListener));
+    }
+
+
+    /**
+     * 设置取消按钮内容
+     *
+     * @param cancelText      标题
+     * @param onClickListener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(int cancelText, View.OnClickListener onClickListener) {
+        return setCancel(mContext.getResources().getString(cancelText), onClickListener);
     }
 
     /**
-     * 取消按钮颜色
+     * 设置取消按钮内容
      *
-     * @param cancelTextColor 取消按钮res id颜色
+     * @param cancelText 标题
+     * @param itemStyle  样式
      * @return 弹窗对象
      */
-    public DialogNormal setCancelTextColor(int cancelTextColor) {
-        mCancel.setTextColor(cancelTextColor);
-        return this;
+    public DialogNormal setCancel(String cancelText, DialogTextStyle itemStyle) {
+        if (cancelText == null || itemStyle == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText(cancelText, null, itemStyle));
     }
 
     /**
-     * 取消按钮颜色
+     * 设置取消按钮内容
      *
-     * @param cancelTextColor 取消按钮字符串颜色
+     * @param cancelText 标题
+     * @param itemStyle  样式
      * @return 弹窗对象
      */
-    public DialogNormal setCancelTextColor(String cancelTextColor) {
-        if (cancelTextColor == null)
-            throw new NullPointerException("cancelTextColor can't be null!");
-        mCancel.setTextColor(Color.parseColor(cancelTextColor));
+    public DialogNormal setCancel(int cancelText, DialogTextStyle itemStyle) {
+        return setCancel(mContext.getResources().getString(cancelText), itemStyle);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
+     * @param cancelText      标题
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(String cancelText, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        if (cancelText == null || itemStyle == null || onClickListener == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText(cancelText, onClickListener, itemStyle));
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
+     * @param cancelText      标题
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(int cancelText, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        return setCancel(mContext.getResources().getString(cancelText), onClickListener, itemStyle);
+    }
+
+    /**
+     * 设置取消按钮
+     *
+     * @param cancel 取消按钮
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(DialogText cancel) {
+        if (cancel == null)
+            throw new NullPointerException("cancel can't be null!");
+        if (cancel.getText() != null)
+            mCancel.setText(cancel.getText());
+        if (cancel.getOnClickListener() != null)
+            mCancel.setOnClickListener(cancel.getOnClickListener());
+        if (cancel.getDialogTextStyle() != null) {
+            mCancel.setTextSize(cancel.getDialogTextStyle().getTextSize());
+            mCancel.setTextColor(cancel.getDialogTextStyle().getColor());
+            mCancel.setTypeface(cancel.getDialogTextStyle().getTypeface());
+        }
         return this;
     }
 
@@ -159,58 +426,114 @@ public class DialogNormal {
      * @param confirmText 确定字符串文字
      * @return 弹窗对象
      */
-    public DialogNormal setConfirmText(String confirmText) {
+    public DialogNormal setConfirm(String confirmText) {
         if (confirmText == null)
-            throw new NullPointerException("confirmText can't be null!");
-        mConfirm.setText(confirmText);
-        return this;
+            throw new NullPointerException();
+        return setConfirm(new DialogText(confirmText));
     }
 
     /**
-     * 设置确定按钮文字
+     * 设置确定按钮内容
      *
      * @param confirmText 确定内容的res id
      * @return 弹窗对象
      */
-    public DialogNormal setConfirmText(int confirmText) {
-        mConfirm.setText(confirmText);
-        return this;
+    public DialogNormal setConfirm(int confirmText) {
+        return setConfirm(mContext.getResources().getString(confirmText));
     }
 
     /**
-     * 确定按钮点击事件
+     * 设置确定按钮内容
      *
-     * @param listener 点击事件
+     * @param confirmText     标题
+     * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setOnConfirmClickListener(View.OnClickListener listener) {
-        if (listener == null)
-            throw new NullPointerException("listener can't be null!");
-        mConfirm.setOnClickListener(listener);
-        return this;
+    public DialogNormal setConfirm(String confirmText, View.OnClickListener onClickListener) {
+        if (confirmText == null || onClickListener == null)
+            throw new NullPointerException();
+        return setConfirm(new DialogText(confirmText, onClickListener));
     }
 
     /**
-     * 设置确定按钮颜色
+     * 设置确定按钮内容
      *
-     * @param cancelTextColor 确定按钮颜色res id
+     * @param confirmText     标题
+     * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setConfirmTextColor(int cancelTextColor) {
-        mConfirm.setTextColor(cancelTextColor);
-        return this;
+    public DialogNormal setConfirm(int confirmText, View.OnClickListener onClickListener) {
+        return setConfirm(mContext.getResources().getString(confirmText), onClickListener);
     }
 
     /**
-     * 设置确定按钮颜色
+     * 设置确定按钮内容
      *
-     * @param cancelTextColor 确定按钮字符串颜色
+     * @param confirmText 确定按钮内容
+     * @param itemStyle   样式
      * @return 弹窗对象
      */
-    public DialogNormal setConfirmTextColor(String cancelTextColor) {
-        if (cancelTextColor == null)
-            throw new NullPointerException("cancelTextColor can't be null!");
-        mConfirm.setTextColor(Color.parseColor(cancelTextColor));
+    public DialogNormal setConfirm(String confirmText, DialogTextStyle itemStyle) {
+        if (confirmText == null || itemStyle == null)
+            throw new NullPointerException();
+        return setConfirm(new DialogText(confirmText, null, itemStyle));
+    }
+
+    /**
+     * 设置确定按钮内容
+     *
+     * @param confirmText 确定按钮内容
+     * @param itemStyle   样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(int confirmText, DialogTextStyle itemStyle) {
+        return setConfirm(mContext.getResources().getString(confirmText), itemStyle);
+    }
+
+    /**
+     * 设置确定按钮内容
+     *
+     * @param confirmText     确定按钮内容
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(String confirmText, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        if (confirmText == null || itemStyle == null || onClickListener == null)
+            throw new NullPointerException();
+        return setConfirm(new DialogText(confirmText, onClickListener, itemStyle));
+    }
+
+    /**
+     * 设置确定按钮内容
+     *
+     * @param confirmText     确定按钮内容
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(int confirmText, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+        return setConfirm(mContext.getResources().getString(confirmText), onClickListener, itemStyle);
+    }
+
+    /**
+     * 设置确定按钮
+     *
+     * @param confirm 确定按钮
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(DialogText confirm) {
+        if (confirm == null)
+            throw new NullPointerException("confirm can't be null!");
+        if (confirm.getText() != null)
+            mCancel.setText(confirm.getText());
+        if (confirm.getOnClickListener() != null)
+            mCancel.setOnClickListener(confirm.getOnClickListener());
+        if (confirm.getDialogTextStyle() != null) {
+            mCancel.setTextSize(confirm.getDialogTextStyle().getTextSize());
+            mCancel.setTextColor(confirm.getDialogTextStyle().getColor());
+            mCancel.setTypeface(confirm.getDialogTextStyle().getTypeface());
+        }
         return this;
     }
 

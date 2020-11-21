@@ -1,6 +1,6 @@
 ## 仿IOS制作的一套Android组件
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)[![Download](https://api.bintray.com/packages/civitasv/iosLike/dialog/images/download.svg)](https://bintray.com/civitasv/iosLike/dialog/_latestVersion)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)  [![Download](https://api.bintray.com/packages/civitasv/iosLike/dialog/images/download.svg)](https://bintray.com/civitasv/iosLike/dialog/_latestVersion)
 
 ### 1. Dialog
 

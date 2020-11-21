@@ -1,5 +1,7 @@
 ## 仿IOS制作的一套Android组件
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ### 1. Dialog
 
 使用方式：

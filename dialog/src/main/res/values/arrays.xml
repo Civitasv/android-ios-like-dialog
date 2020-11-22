@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LoadingView">
+        <attr name="frameCount" format="integer" />
+        <attr name="duration" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="ProgressView">
+        <!-- 进度条颜色-->
+        <attr name="progress_color" format="color" />
+        <!-- 进度条半径-->
+        <attr name="progress_radius" format="dimension" />
+        <!-- 背景色-->
+        <attr name="background_color" format="color" />
+        <!-- 进度条文字颜色-->
+        <attr name="progress_text_color" format="color" />
+        <!-- 进度条文字大小-->
+        <attr name="progress_text_size" format="dimension" />
+        <!-- 进度条宽度-->
+        <attr name="progress_width" format="dimension" />
+        <!-- 进度最大值-->
+        <attr name="max_progress" format="float" />
+        <!-- 当前进度值-->
+        <attr name="progress" format="float" />
+        <!-- 进度方向-->
+        <attr name="direction">
+            <enum name="left" value="0" />
+            <enum name="top" value="1" />
+            <enum name="right" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
+    </declare-styleable>
+</resources>

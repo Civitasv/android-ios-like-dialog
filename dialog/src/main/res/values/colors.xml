@@ -11,6 +11,7 @@
     <color name="ios_like_grey4">#bcbcc0</color>
     <color name="ios_like_grey5">#d8d8dc</color>
     <color name="ios_like_grey6">#ebebf0</color>
+    <color name="ios_like_hud">#636365</color>
 
     <color name="ios_like_blue">#0040dd</color>
     <color name="ios_like_green">#248a3d</color>

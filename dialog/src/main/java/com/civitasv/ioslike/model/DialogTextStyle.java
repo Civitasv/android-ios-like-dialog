@@ -12,14 +12,14 @@ import android.graphics.Typeface;
 public final class DialogTextStyle {
     private final int color; // 颜色
 
-    private final int textSize; // 字大
+    private final float textSize; // 字大
 
     private final Typeface typeface; // 样式
 
     public static class Builder {
         // 可选参数
         private int color = Color.parseColor("#FF000000"); // 黑色
-        private int textSize = 16; // 单位：sp
+        private float textSize = 16; // 单位：sp
         private Typeface typeface = Typeface.defaultFromStyle(Typeface.NORMAL);
 
         public Builder() {
@@ -36,7 +36,7 @@ public final class DialogTextStyle {
             return this;
         }
 
-        public Builder textSize(int textSize) {
+        public Builder textSize(float textSize) {
             this.textSize = textSize;
             return this;
         }
@@ -61,7 +61,7 @@ public final class DialogTextStyle {
         return color;
     }
 
-    public int getTextSize() {
+    public float getTextSize() {
         return textSize;
     }
 

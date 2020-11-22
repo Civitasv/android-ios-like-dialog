@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,6 +55,9 @@ public class DialogBottom {
         mRecyclerView = view.findViewById(R.id.recycler_view);
         mDialog = new Dialog(context, R.style.BottomDialogStyle);
         mDialog.setContentView(view);
+        // 默认可以自动关闭
+        mDialog.setCanceledOnTouchOutside(true);
+        mDialog.setCancelable(true);
         Window dialogWindow = mDialog.getWindow();
         dialogWindow.setGravity(Gravity.START | Gravity.BOTTOM);
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
@@ -123,7 +127,7 @@ public class DialogBottom {
      * @param resId 条目
      * @return 弹窗对象
      */
-    public DialogBottom addBottomItem(int resId) {
+    public DialogBottom addBottomItem(@StringRes int resId) {
         return addBottomItem(mContext.getResources().getString(resId));
     }
 
@@ -147,7 +151,7 @@ public class DialogBottom {
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogBottom addBottomItem(int resId, View.OnClickListener onClickListener) {
+    public DialogBottom addBottomItem(@StringRes int resId, View.OnClickListener onClickListener) {
         return addBottomItem(mContext.getResources().getString(resId), onClickListener);
     }
 
@@ -171,7 +175,7 @@ public class DialogBottom {
      * @param itemStyle 条目样式
      * @return 弹窗对象
      */
-    public DialogBottom addBottomItem(int resId, DialogTextStyle itemStyle) {
+    public DialogBottom addBottomItem(@StringRes int resId, DialogTextStyle itemStyle) {
         return addBottomItem(mContext.getResources().getString(resId), null, itemStyle);
     }
 
@@ -197,7 +201,7 @@ public class DialogBottom {
      * @param itemStyle       条目样式
      * @return 弹窗对象
      */
-    public DialogBottom addBottomItem(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+    public DialogBottom addBottomItem(@StringRes int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         return addBottomItem(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
@@ -219,7 +223,7 @@ public class DialogBottom {
      * @param resId 标题
      * @return 弹窗对象
      */
-    public DialogBottom setTitle(int resId) {
+    public DialogBottom setTitle(@StringRes int resId) {
         return setTitle(mContext.getResources().getString(resId));
     }
 
@@ -243,7 +247,7 @@ public class DialogBottom {
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogBottom setTitle(int resId, View.OnClickListener onClickListener) {
+    public DialogBottom setTitle(@StringRes int resId, View.OnClickListener onClickListener) {
         return setTitle(mContext.getResources().getString(resId), onClickListener);
     }
 
@@ -267,7 +271,7 @@ public class DialogBottom {
      * @param itemStyle 样式
      * @return 弹窗对象
      */
-    public DialogBottom setTitle(int resId, DialogTextStyle itemStyle) {
+    public DialogBottom setTitle(@StringRes int resId, DialogTextStyle itemStyle) {
         return setTitle(mContext.getResources().getString(resId), itemStyle);
     }
 
@@ -294,7 +298,7 @@ public class DialogBottom {
      * @param itemStyle       样式
      * @return 弹窗对象
      */
-    public DialogBottom setTitle(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+    public DialogBottom setTitle(@StringRes int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         return setTitle(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
@@ -366,7 +370,7 @@ public class DialogBottom {
      * @param resId 取消按钮res id
      * @return 弹窗对象
      */
-    public DialogBottom setCancel(int resId) {
+    public DialogBottom setCancel(@StringRes int resId) {
         return setCancel(mContext.getResources().getString(resId));
     }
 
@@ -390,7 +394,7 @@ public class DialogBottom {
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogBottom setCancel(int resId, View.OnClickListener onClickListener) {
+    public DialogBottom setCancel(@StringRes int resId, View.OnClickListener onClickListener) {
         return setCancel(mContext.getResources().getString(resId), onClickListener);
     }
 
@@ -414,7 +418,7 @@ public class DialogBottom {
      * @param itemStyle 样式
      * @return 弹窗对象
      */
-    public DialogBottom setCancel(int resId, DialogTextStyle itemStyle) {
+    public DialogBottom setCancel(@StringRes int resId, DialogTextStyle itemStyle) {
         return setCancel(mContext.getResources().getString(resId), itemStyle);
     }
 
@@ -440,7 +444,7 @@ public class DialogBottom {
      * @param itemStyle       样式
      * @return 弹窗对象
      */
-    public DialogBottom setCancel(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+    public DialogBottom setCancel(@StringRes int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         return setCancel(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
@@ -523,6 +527,18 @@ public class DialogBottom {
      */
     public DialogBottom setShowCancel(boolean showCancel) {
         mShowCancel = showCancel;
+        return this;
+    }
+
+    /**
+     * 设置背景色
+     *
+     * @param amount 背景暗色程度
+     * @return 弹窗对象
+     */
+    public DialogBottom setDimAmount(float amount) {
+        Window dialogWindow = mDialog.getWindow();
+        dialogWindow.setDimAmount(amount);
         return this;
     }
 

@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
 import com.civitasv.dialog.R;
@@ -56,6 +57,9 @@ public class DialogNormal {
         mSplit = view.findViewById(R.id.split);
         mDialog = new Dialog(context, R.style.NormalDialogStyle);
         mDialog.setContentView(view);
+        // 默认只能通过dismiss()方法关闭
+        mDialog.setCancelable(false);
+        mDialog.setCanceledOnTouchOutside(false);
         Window dialogWindow = mDialog.getWindow();
         if (dialogWindow == null) return;
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
@@ -84,7 +88,7 @@ public class DialogNormal {
      * @param resId 标题
      * @return 弹窗对象
      */
-    public DialogNormal setTitle(int resId) {
+    public DialogNormal setTitle(@StringRes int resId) {
         return setTitle(mContext.getResources().getString(resId));
     }
 
@@ -108,7 +112,7 @@ public class DialogNormal {
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setTitle(int resId, View.OnClickListener onClickListener) {
+    public DialogNormal setTitle(@StringRes int resId, View.OnClickListener onClickListener) {
         return setTitle(mContext.getResources().getString(resId), onClickListener);
     }
 
@@ -132,7 +136,7 @@ public class DialogNormal {
      * @param itemStyle 条目样式
      * @return 弹窗对象
      */
-    public DialogNormal setTitle(int resId, DialogTextStyle itemStyle) {
+    public DialogNormal setTitle(@StringRes int resId, DialogTextStyle itemStyle) {
         return setTitle(mContext.getResources().getString(resId), itemStyle);
     }
 
@@ -158,7 +162,7 @@ public class DialogNormal {
      * @param itemStyle       条目样式
      * @return 弹窗对象
      */
-    public DialogNormal setTitle(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+    public DialogNormal setTitle(@StringRes int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         return setTitle(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
@@ -230,7 +234,7 @@ public class DialogNormal {
      * @param resId 弹窗内容
      * @return 弹窗对象
      */
-    public DialogNormal setContent(int resId) {
+    public DialogNormal setContent(@StringRes int resId) {
         return setContent(mContext.getResources().getString(resId));
     }
 
@@ -254,7 +258,7 @@ public class DialogNormal {
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setContent(int resId, View.OnClickListener onClickListener) {
+    public DialogNormal setContent(@StringRes int resId, View.OnClickListener onClickListener) {
         return setContent(mContext.getResources().getString(resId), onClickListener);
     }
 
@@ -278,7 +282,7 @@ public class DialogNormal {
      * @param itemStyle 样式
      * @return 弹窗对象
      */
-    public DialogNormal setContent(int resId, DialogTextStyle itemStyle) {
+    public DialogNormal setContent(@StringRes int resId, DialogTextStyle itemStyle) {
         return setContent(mContext.getResources().getString(resId), itemStyle);
     }
 
@@ -304,7 +308,7 @@ public class DialogNormal {
      * @param itemStyle       样式
      * @return 弹窗对象
      */
-    public DialogNormal setContent(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+    public DialogNormal setContent(@StringRes int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         return setContent(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
@@ -376,7 +380,7 @@ public class DialogNormal {
      * @param resId 取消按钮res id
      * @return 弹窗对象
      */
-    public DialogNormal setCancel(int resId) {
+    public DialogNormal setCancel(@StringRes int resId) {
         return setCancel(mContext.getResources().getString(resId));
     }
 
@@ -401,7 +405,7 @@ public class DialogNormal {
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setCancel(int resId, View.OnClickListener onClickListener) {
+    public DialogNormal setCancel(@StringRes int resId, View.OnClickListener onClickListener) {
         return setCancel(mContext.getResources().getString(resId), onClickListener);
     }
 
@@ -425,7 +429,7 @@ public class DialogNormal {
      * @param itemStyle 样式
      * @return 弹窗对象
      */
-    public DialogNormal setCancel(int resId, DialogTextStyle itemStyle) {
+    public DialogNormal setCancel(@StringRes int resId, DialogTextStyle itemStyle) {
         return setCancel(mContext.getResources().getString(resId), itemStyle);
     }
 
@@ -451,7 +455,7 @@ public class DialogNormal {
      * @param itemStyle       样式
      * @return 弹窗对象
      */
-    public DialogNormal setCancel(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+    public DialogNormal setCancel(@StringRes int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         return setCancel(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
@@ -522,7 +526,7 @@ public class DialogNormal {
      * @param resId 确定内容的res id
      * @return 弹窗对象
      */
-    public DialogNormal setConfirm(int resId) {
+    public DialogNormal setConfirm(@StringRes int resId) {
         return setConfirm(mContext.getResources().getString(resId));
     }
 
@@ -546,7 +550,7 @@ public class DialogNormal {
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
-    public DialogNormal setConfirm(int resId, View.OnClickListener onClickListener) {
+    public DialogNormal setConfirm(@StringRes int resId, View.OnClickListener onClickListener) {
         return setConfirm(mContext.getResources().getString(resId), onClickListener);
     }
 
@@ -570,7 +574,7 @@ public class DialogNormal {
      * @param itemStyle 样式
      * @return 弹窗对象
      */
-    public DialogNormal setConfirm(int resId, DialogTextStyle itemStyle) {
+    public DialogNormal setConfirm(@StringRes int resId, DialogTextStyle itemStyle) {
         return setConfirm(mContext.getResources().getString(resId), itemStyle);
     }
 
@@ -596,7 +600,7 @@ public class DialogNormal {
      * @param itemStyle       样式
      * @return 弹窗对象
      */
-    public DialogNormal setConfirm(int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
+    public DialogNormal setConfirm(@StringRes int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         return setConfirm(mContext.getResources().getString(resId), onClickListener, itemStyle);
     }
 
@@ -674,6 +678,18 @@ public class DialogNormal {
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.height = (int) (DisplayUtil.getInstance(mContext).getScreenHeight() * heightRatio);
         dialogWindow.setAttributes(lp);
+        return this;
+    }
+
+    /**
+     * 设置背景色
+     *
+     * @param amount 背景暗色程度
+     * @return 弹窗对象
+     */
+    public DialogNormal setDimAmount(float amount) {
+        Window dialogWindow = mDialog.getWindow();
+        dialogWindow.setDimAmount(amount);
         return this;
     }
 

@@ -27,17 +27,35 @@ public final class DialogText {
         return dialogTextStyle;
     }
 
-    public DialogText(String text) {
-        this(text, null);
+    public static class Builder {
+        private final String text; // 内容
+
+        private View.OnClickListener onClickListener = null; // 点击事件
+
+        private DialogTextStyle dialogTextStyle = null; // 样式
+
+        public Builder(String text) {
+            this.text = text;
+        }
+
+        public Builder setOnclickListener(View.OnClickListener onclickListener) {
+            this.onClickListener = onclickListener;
+            return this;
+        }
+
+        public Builder setDialogTextStyle(DialogTextStyle dialogTextStyle) {
+            this.dialogTextStyle = dialogTextStyle;
+            return this;
+        }
+
+        public DialogText build() {
+            return new DialogText(this);
+        }
     }
 
-    public DialogText(String text, View.OnClickListener onClickListener) {
-        this(text, onClickListener, null);
-    }
-
-    public DialogText(String text, View.OnClickListener onClickListener, DialogTextStyle dialogTextStyle) {
-        this.text = text;
-        this.onClickListener = onClickListener;
-        this.dialogTextStyle = dialogTextStyle;
+    public DialogText(Builder builder) {
+        this.text = builder.text;
+        this.onClickListener = builder.onClickListener;
+        this.dialogTextStyle = builder.dialogTextStyle;
     }
 }

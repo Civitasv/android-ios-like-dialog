@@ -75,7 +75,7 @@ public class DialogNormal {
     public DialogNormal setTitle(String title) {
         if (title == null)
             throw new NullPointerException();
-        return setTitle(new DialogText(title));
+        return setTitle(new DialogText.Builder(title).build());
     }
 
     /**
@@ -98,7 +98,7 @@ public class DialogNormal {
     public DialogNormal setTitle(String title, View.OnClickListener onClickListener) {
         if (title == null || onClickListener == null)
             throw new NullPointerException();
-        return setTitle(new DialogText(title, onClickListener));
+        return setTitle(new DialogText.Builder(title).setOnclickListener(onClickListener).build());
     }
 
     /**
@@ -122,7 +122,7 @@ public class DialogNormal {
     public DialogNormal setTitle(String title, DialogTextStyle itemStyle) {
         if (title == null || itemStyle == null)
             throw new NullPointerException();
-        return setTitle(new DialogText(title, null, itemStyle));
+        return setTitle(new DialogText.Builder(title).setDialogTextStyle(itemStyle).build());
     }
 
     /**
@@ -147,7 +147,7 @@ public class DialogNormal {
     public DialogNormal setTitle(String title, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         if (title == null || itemStyle == null || onClickListener == null)
             throw new NullPointerException();
-        return setTitle(new DialogText(title, onClickListener, itemStyle));
+        return setTitle(new DialogText.Builder(title).setDialogTextStyle(itemStyle).setOnclickListener(onClickListener).build());
     }
 
     /**
@@ -185,6 +185,34 @@ public class DialogNormal {
     }
 
     /**
+     * 设置标题样式
+     *
+     * @param style 样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setTitleStyle(DialogTextStyle style) {
+        if (style == null)
+            throw new NullPointerException();
+        mTitle.setTextSize(style.getTextSize());
+        mTitle.setTextColor(style.getColor());
+        mTitle.setTypeface(style.getTypeface());
+        return this;
+    }
+
+    /**
+     * 设置标题点击事件
+     *
+     * @param onClickListener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setTitleClickListener(View.OnClickListener onClickListener) {
+        if (onClickListener == null)
+            throw new NullPointerException();
+        mTitle.setOnClickListener(onClickListener);
+        return this;
+    }
+
+    /**
      * 设置内容
      *
      * @param content 弹窗内容
@@ -193,7 +221,7 @@ public class DialogNormal {
     public DialogNormal setContent(String content) {
         if (content == null)
             throw new NullPointerException();
-        return setContent(new DialogText(content));
+        return setContent(new DialogText.Builder(content).build());
     }
 
     /**
@@ -216,7 +244,7 @@ public class DialogNormal {
     public DialogNormal setContent(String content, View.OnClickListener onClickListener) {
         if (content == null || onClickListener == null)
             throw new NullPointerException();
-        return setContent(new DialogText(content, onClickListener));
+        return setContent(new DialogText.Builder(content).setOnclickListener(onClickListener).build());
     }
 
     /**
@@ -240,7 +268,7 @@ public class DialogNormal {
     public DialogNormal setContent(String content, DialogTextStyle itemStyle) {
         if (content == null || itemStyle == null)
             throw new NullPointerException();
-        return setContent(new DialogText(content, null, itemStyle));
+        return setContent(new DialogText.Builder(content).setDialogTextStyle(itemStyle).build());
     }
 
     /**
@@ -265,7 +293,7 @@ public class DialogNormal {
     public DialogNormal setContent(String content, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         if (content == null || itemStyle == null || onClickListener == null)
             throw new NullPointerException();
-        return setContent(new DialogText(content, onClickListener, itemStyle));
+        return setContent(new DialogText.Builder(content).setDialogTextStyle(itemStyle).setOnclickListener(onClickListener).build());
     }
 
     /**
@@ -303,6 +331,34 @@ public class DialogNormal {
     }
 
     /**
+     * 设置内容样式
+     *
+     * @param style 样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setContentStyle(DialogTextStyle style) {
+        if (style == null)
+            throw new NullPointerException();
+        mContent.setTextSize(style.getTextSize());
+        mContent.setTextColor(style.getColor());
+        mContent.setTypeface(style.getTypeface());
+        return this;
+    }
+
+    /**
+     * 设置内容点击事件
+     *
+     * @param onClickListener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setContentClickListener(View.OnClickListener onClickListener) {
+        if (onClickListener == null)
+            throw new NullPointerException();
+        mContent.setOnClickListener(onClickListener);
+        return this;
+    }
+
+    /**
      * 设置取消按钮内容
      *
      * @param cancelText 取消按钮字符串内容
@@ -311,7 +367,7 @@ public class DialogNormal {
     public DialogNormal setCancel(String cancelText) {
         if (cancelText == null)
             throw new NullPointerException();
-        return setCancel(new DialogText(cancelText));
+        return setCancel(new DialogText.Builder(cancelText).build());
     }
 
     /**
@@ -334,7 +390,7 @@ public class DialogNormal {
     public DialogNormal setCancel(String cancelText, View.OnClickListener onClickListener) {
         if (cancelText == null || onClickListener == null)
             throw new NullPointerException();
-        return setCancel(new DialogText(cancelText, onClickListener));
+        return setCancel(new DialogText.Builder(cancelText).setOnclickListener(onClickListener).build());
     }
 
 
@@ -359,7 +415,7 @@ public class DialogNormal {
     public DialogNormal setCancel(String cancelText, DialogTextStyle itemStyle) {
         if (cancelText == null || itemStyle == null)
             throw new NullPointerException();
-        return setCancel(new DialogText(cancelText, null, itemStyle));
+        return setCancel(new DialogText.Builder(cancelText).setDialogTextStyle(itemStyle).build());
     }
 
     /**
@@ -384,7 +440,7 @@ public class DialogNormal {
     public DialogNormal setCancel(String cancelText, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         if (cancelText == null || itemStyle == null || onClickListener == null)
             throw new NullPointerException();
-        return setCancel(new DialogText(cancelText, onClickListener, itemStyle));
+        return setCancel(new DialogText.Builder(cancelText).setDialogTextStyle(itemStyle).setOnclickListener(onClickListener).build());
     }
 
     /**
@@ -421,6 +477,34 @@ public class DialogNormal {
     }
 
     /**
+     * 设置取消按钮样式
+     *
+     * @param style 样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancelStyle(DialogTextStyle style) {
+        if (style == null)
+            throw new NullPointerException();
+        mCancel.setTextSize(style.getTextSize());
+        mCancel.setTextColor(style.getColor());
+        mCancel.setTypeface(style.getTypeface());
+        return this;
+    }
+
+    /**
+     * 设置取消按钮点击事件
+     *
+     * @param onClickListener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancelClickListener(View.OnClickListener onClickListener) {
+        if (onClickListener == null)
+            throw new NullPointerException();
+        mCancel.setOnClickListener(onClickListener);
+        return this;
+    }
+
+    /**
      * 设置确定按钮文字
      *
      * @param confirmText 确定字符串文字
@@ -429,7 +513,7 @@ public class DialogNormal {
     public DialogNormal setConfirm(String confirmText) {
         if (confirmText == null)
             throw new NullPointerException();
-        return setConfirm(new DialogText(confirmText));
+        return setConfirm(new DialogText.Builder(confirmText).build());
     }
 
     /**
@@ -452,7 +536,7 @@ public class DialogNormal {
     public DialogNormal setConfirm(String confirmText, View.OnClickListener onClickListener) {
         if (confirmText == null || onClickListener == null)
             throw new NullPointerException();
-        return setConfirm(new DialogText(confirmText, onClickListener));
+        return setConfirm(new DialogText.Builder(confirmText).setOnclickListener(onClickListener).build());
     }
 
     /**
@@ -476,7 +560,7 @@ public class DialogNormal {
     public DialogNormal setConfirm(String confirmText, DialogTextStyle itemStyle) {
         if (confirmText == null || itemStyle == null)
             throw new NullPointerException();
-        return setConfirm(new DialogText(confirmText, null, itemStyle));
+        return setConfirm(new DialogText.Builder(confirmText).setDialogTextStyle(itemStyle).build());
     }
 
     /**
@@ -501,7 +585,7 @@ public class DialogNormal {
     public DialogNormal setConfirm(String confirmText, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         if (confirmText == null || itemStyle == null || onClickListener == null)
             throw new NullPointerException();
-        return setConfirm(new DialogText(confirmText, onClickListener, itemStyle));
+        return setConfirm(new DialogText.Builder(confirmText).setDialogTextStyle(itemStyle).setOnclickListener(onClickListener).build());
     }
 
     /**
@@ -526,14 +610,42 @@ public class DialogNormal {
         if (confirm == null)
             throw new NullPointerException("confirm can't be null!");
         if (confirm.getText() != null)
-            mCancel.setText(confirm.getText());
+            mConfirm.setText(confirm.getText());
         if (confirm.getOnClickListener() != null)
-            mCancel.setOnClickListener(confirm.getOnClickListener());
+            mConfirm.setOnClickListener(confirm.getOnClickListener());
         if (confirm.getDialogTextStyle() != null) {
-            mCancel.setTextSize(confirm.getDialogTextStyle().getTextSize());
-            mCancel.setTextColor(confirm.getDialogTextStyle().getColor());
-            mCancel.setTypeface(confirm.getDialogTextStyle().getTypeface());
+            mConfirm.setTextSize(confirm.getDialogTextStyle().getTextSize());
+            mConfirm.setTextColor(confirm.getDialogTextStyle().getColor());
+            mConfirm.setTypeface(confirm.getDialogTextStyle().getTypeface());
         }
+        return this;
+    }
+
+    /**
+     * 设置确定按钮样式
+     *
+     * @param style 样式
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirmStyle(DialogTextStyle style) {
+        if (style == null)
+            throw new NullPointerException();
+        mConfirm.setTextSize(style.getTextSize());
+        mConfirm.setTextColor(style.getColor());
+        mConfirm.setTypeface(style.getTypeface());
+        return this;
+    }
+
+    /**
+     * 设置确定按钮点击事件
+     *
+     * @param onClickListener 点击事件
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirmClickListener(View.OnClickListener onClickListener) {
+        if (onClickListener == null)
+            throw new NullPointerException();
+        mConfirm.setOnClickListener(onClickListener);
         return this;
     }
 

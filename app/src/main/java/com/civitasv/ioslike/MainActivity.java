@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
                     .setContent("内容", content -> {
                         Toast.makeText(this, "点击内容", Toast.LENGTH_LONG).show();
                     })
+                    .setCancel("取消")
+                    .setCancelClickListener(cancel -> Toast.makeText(this, "取消按钮点击", Toast.LENGTH_LONG).show())
                     .setCanceledOnTouchOutside(false)
                     .show();
         });

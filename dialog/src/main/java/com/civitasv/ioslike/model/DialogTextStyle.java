@@ -18,7 +18,7 @@ public final class DialogTextStyle {
 
     public static class Builder {
         // 可选参数
-        private int color = Color.parseColor("#0040dd");
+        private int color = Color.parseColor("#FF000000"); // 黑色
         private int textSize = 16; // 单位：sp
         private Typeface typeface = Typeface.defaultFromStyle(Typeface.NORMAL);
 

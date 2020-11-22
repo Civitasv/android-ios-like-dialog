@@ -52,7 +52,7 @@ publishing  {
         iosLike(MavenPublication) {
             groupId 'com.civitasv.iosLike'
             artifactId 'dialog'
-            version '0.1.1'
+            version '0.1.2'
             artifact(sourceJar)
             artifact("$buildDir/outputs/aar/dialog-release.aar")
         }
@@ -76,7 +76,7 @@ publish {
     userOrg = 'civitasv' // user name
     groupId = 'com.civitasv.iosLike' // 到repository一级的域名
     artifactId = 'dialog' // package name
-    publishVersion = '0.1.1' // version
+    publishVersion = '0.1.2' // version
     desc = '仿IOS制作的Android组件'
     website = 'https://github.com/Civitasv/iosLike'
 }

@@ -1,7 +1,14 @@
 package com.civitasv.ioslike.model;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+
+import androidx.annotation.ColorRes;
+import androidx.core.content.ContextCompat;
+
+import com.civitasv.dialog.R;
+import com.civitasv.ioslike.util.UIUtil;
 
 
 /**
@@ -10,6 +17,8 @@ import android.graphics.Typeface;
  * 2020-11-21
  */
 public final class DialogTextStyle {
+    private final Context context;
+
     private final int color; // 颜色
 
     private final float textSize; // 字大
@@ -17,13 +26,17 @@ public final class DialogTextStyle {
     private final Typeface typeface; // 样式
 
     public static class Builder {
+        private final Context context;
         // 可选参数
-        private int color = Color.parseColor("#FF000000"); // 黑色
-        private float textSize = 16; // 单位：sp
-        private Typeface typeface = Typeface.defaultFromStyle(Typeface.NORMAL);
+        private int color;
+        private float textSize; // 单位：sp
+        private Typeface typeface;
 
-        public Builder() {
-
+        public Builder(Context context) {
+            this.context = context;
+            this.color = ContextCompat.getColor(context, R.color.black);  // 黑色
+            this.textSize = 16;
+            this.typeface = Typeface.defaultFromStyle(Typeface.NORMAL);
         }
 
         public Builder color(String color) {
@@ -31,8 +44,8 @@ public final class DialogTextStyle {
             return this;
         }
 
-        public Builder color(int color) {
-            this.color = color;
+        public Builder color(@ColorRes int color) {
+            this.color = ContextCompat.getColor(context, color);
             return this;
         }
 
@@ -52,6 +65,7 @@ public final class DialogTextStyle {
     }
 
     private DialogTextStyle(Builder builder) {
+        context = builder.context;
         color = builder.color;
         textSize = builder.textSize;
         typeface = builder.typeface;

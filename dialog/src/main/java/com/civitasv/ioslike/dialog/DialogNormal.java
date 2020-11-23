@@ -17,6 +17,7 @@ import com.civitasv.dialog.R;
 import com.civitasv.ioslike.model.DialogText;
 import com.civitasv.ioslike.model.DialogTextStyle;
 import com.civitasv.ioslike.util.DisplayUtil;
+import com.civitasv.ioslike.util.UIUtil;
 
 /**
  * @author Civitasv
@@ -36,8 +37,10 @@ public class DialogNormal {
 
     private boolean mShowTitle = false;
     private boolean mShowContent = false;
-    private boolean mShowCancel = true;
-    private boolean mShowConfirm = true;
+    private boolean mShowCancel = false;
+    private boolean mShowConfirm = false;
+    private boolean mCancelAutoDismiss = true;
+    private boolean mConfirmAutoDismiss = true;
 
     /**
      * 构造方法
@@ -377,11 +380,35 @@ public class DialogNormal {
     /**
      * 设置取消按钮内容
      *
+     * @param cancelText 取消按钮字符串内容
+     * @param dismiss    点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(String cancelText, boolean dismiss) {
+        if (cancelText == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText.Builder(cancelText).build(), dismiss);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
      * @param resId 取消按钮res id
      * @return 弹窗对象
      */
     public DialogNormal setCancel(@StringRes int resId) {
         return setCancel(mContext.getResources().getString(resId));
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
+     * @param resId   取消按钮res id
+     * @param dismiss 点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(@StringRes int resId, boolean dismiss) {
+        return setCancel(mContext.getResources().getString(resId), dismiss);
     }
 
     /**
@@ -397,6 +424,19 @@ public class DialogNormal {
         return setCancel(new DialogText.Builder(cancelText).setOnclickListener(onClickListener).build());
     }
 
+    /**
+     * 设置取消按钮内容
+     *
+     * @param cancelText      标题
+     * @param onClickListener 点击事件
+     * @param dismiss         点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(String cancelText, View.OnClickListener onClickListener, boolean dismiss) {
+        if (cancelText == null || onClickListener == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText.Builder(cancelText).setOnclickListener(onClickListener).build(), dismiss);
+    }
 
     /**
      * 设置取消按钮内容
@@ -407,6 +447,18 @@ public class DialogNormal {
      */
     public DialogNormal setCancel(@StringRes int resId, View.OnClickListener onClickListener) {
         return setCancel(mContext.getResources().getString(resId), onClickListener);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
+     * @param resId           标题
+     * @param onClickListener 点击事件
+     * @param dismiss         点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(@StringRes int resId, View.OnClickListener onClickListener, boolean dismiss) {
+        return setCancel(mContext.getResources().getString(resId), onClickListener, dismiss);
     }
 
     /**
@@ -425,12 +477,38 @@ public class DialogNormal {
     /**
      * 设置取消按钮内容
      *
+     * @param cancelText 标题
+     * @param itemStyle  样式
+     * @param dismiss    点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(String cancelText, DialogTextStyle itemStyle, boolean dismiss) {
+        if (cancelText == null || itemStyle == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText.Builder(cancelText).setDialogTextStyle(itemStyle).build(), dismiss);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
      * @param resId     标题
      * @param itemStyle 样式
      * @return 弹窗对象
      */
     public DialogNormal setCancel(@StringRes int resId, DialogTextStyle itemStyle) {
         return setCancel(mContext.getResources().getString(resId), itemStyle);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
+     * @param resId     标题
+     * @param itemStyle 样式
+     * @param dismiss   点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(@StringRes int resId, DialogTextStyle itemStyle, boolean dismiss) {
+        return setCancel(mContext.getResources().getString(resId), itemStyle, dismiss);
     }
 
     /**
@@ -450,6 +528,21 @@ public class DialogNormal {
     /**
      * 设置取消按钮内容
      *
+     * @param cancelText      标题
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @param dismiss         点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(String cancelText, View.OnClickListener onClickListener, boolean dismiss, DialogTextStyle itemStyle) {
+        if (cancelText == null || itemStyle == null || onClickListener == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText.Builder(cancelText).setDialogTextStyle(itemStyle).setOnclickListener(onClickListener).build(), dismiss);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
      * @param resId           标题
      * @param onClickListener 点击事件
      * @param itemStyle       样式
@@ -460,12 +553,26 @@ public class DialogNormal {
     }
 
     /**
-     * 设置取消按钮
+     * 设置取消按钮内容
      *
-     * @param cancel 取消按钮
+     * @param resId           标题
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @param dismiss         点击是否消失
      * @return 弹窗对象
      */
-    public DialogNormal setCancel(DialogText cancel) {
+    public DialogNormal setCancel(@StringRes int resId, View.OnClickListener onClickListener, boolean dismiss, DialogTextStyle itemStyle) {
+        return setCancel(mContext.getResources().getString(resId), onClickListener, dismiss, itemStyle);
+    }
+
+    /**
+     * 设置取消按钮
+     *
+     * @param cancel  取消按钮
+     * @param dismiss 是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(DialogText cancel, boolean dismiss) {
         if (cancel == null)
             throw new NullPointerException("cancel can't be null!");
         if (cancel.getText() != null)
@@ -477,6 +584,37 @@ public class DialogNormal {
             mCancel.setTextColor(cancel.getDialogTextStyle().getColor());
             mCancel.setTypeface(cancel.getDialogTextStyle().getTypeface());
         }
+        if (dismiss)
+            mCancel.setOnClickListener(v -> dismiss());
+        mCancelAutoDismiss = dismiss;
+        mShowCancel = true;
+        return this;
+    }
+
+    /**
+     * 设置取消按钮
+     *
+     * @param cancel 取消按钮 默认点击消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setCancel(DialogText cancel) {
+        if (cancel == null)
+            throw new NullPointerException("cancel can't be null!");
+        if (cancel.getText() != null)
+            mCancel.setText(cancel.getText());
+        if (cancel.getOnClickListener() != null)
+            mCancel.setOnClickListener(v -> {
+                cancel.getOnClickListener().onClick(v);
+                dismiss();
+            });
+        else mCancel.setOnClickListener(v -> dismiss());
+        if (cancel.getDialogTextStyle() != null) {
+            mCancel.setTextSize(cancel.getDialogTextStyle().getTextSize());
+            mCancel.setTextColor(cancel.getDialogTextStyle().getColor());
+            mCancel.setTypeface(cancel.getDialogTextStyle().getTypeface());
+        }
+        mCancelAutoDismiss = true;
+        mShowCancel = true;
         return this;
     }
 
@@ -504,7 +642,13 @@ public class DialogNormal {
     public DialogNormal setCancelClickListener(View.OnClickListener onClickListener) {
         if (onClickListener == null)
             throw new NullPointerException();
-        mCancel.setOnClickListener(onClickListener);
+        if (mCancelAutoDismiss)
+            mCancel.setOnClickListener(v -> {
+                onClickListener.onClick(v);
+                dismiss();
+            });
+        else
+            mCancel.setOnClickListener(onClickListener);
         return this;
     }
 
@@ -521,6 +665,19 @@ public class DialogNormal {
     }
 
     /**
+     * 设置确定按钮文字
+     *
+     * @param confirmText 确定字符串文字
+     * @param dismiss     是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(String confirmText, boolean dismiss) {
+        if (confirmText == null)
+            throw new NullPointerException();
+        return setConfirm(new DialogText.Builder(confirmText).build(), dismiss);
+    }
+
+    /**
      * 设置确定按钮内容
      *
      * @param resId 确定内容的res id
@@ -528,6 +685,17 @@ public class DialogNormal {
      */
     public DialogNormal setConfirm(@StringRes int resId) {
         return setConfirm(mContext.getResources().getString(resId));
+    }
+
+    /**
+     * 设置确定按钮内容
+     *
+     * @param resId   确定内容的res id
+     * @param dismiss 是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(@StringRes int resId, boolean dismiss) {
+        return setConfirm(mContext.getResources().getString(resId), dismiss);
     }
 
     /**
@@ -546,12 +714,38 @@ public class DialogNormal {
     /**
      * 设置确定按钮内容
      *
+     * @param confirmText     标题
+     * @param onClickListener 点击事件
+     * @param dismiss         是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(String confirmText, View.OnClickListener onClickListener, boolean dismiss) {
+        if (confirmText == null || onClickListener == null)
+            throw new NullPointerException();
+        return setConfirm(new DialogText.Builder(confirmText).setOnclickListener(onClickListener).build(), dismiss);
+    }
+
+    /**
+     * 设置确定按钮内容
+     *
      * @param resId           标题
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
     public DialogNormal setConfirm(@StringRes int resId, View.OnClickListener onClickListener) {
         return setConfirm(mContext.getResources().getString(resId), onClickListener);
+    }
+
+    /**
+     * 设置确定按钮内容
+     *
+     * @param resId           标题
+     * @param onClickListener 点击事件
+     * @param dismiss         是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(@StringRes int resId, View.OnClickListener onClickListener, boolean dismiss) {
+        return setConfirm(mContext.getResources().getString(resId), onClickListener, dismiss);
     }
 
     /**
@@ -570,12 +764,38 @@ public class DialogNormal {
     /**
      * 设置确定按钮内容
      *
+     * @param confirmText 确定按钮内容
+     * @param itemStyle   样式
+     * @param dismiss     是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(String confirmText, DialogTextStyle itemStyle, boolean dismiss) {
+        if (confirmText == null || itemStyle == null)
+            throw new NullPointerException();
+        return setConfirm(new DialogText.Builder(confirmText).setDialogTextStyle(itemStyle).build(), dismiss);
+    }
+
+    /**
+     * 设置确定按钮内容
+     *
      * @param resId     确定按钮内容
      * @param itemStyle 样式
      * @return 弹窗对象
      */
     public DialogNormal setConfirm(@StringRes int resId, DialogTextStyle itemStyle) {
         return setConfirm(mContext.getResources().getString(resId), itemStyle);
+    }
+
+    /**
+     * 设置确定按钮内容
+     *
+     * @param resId     确定按钮内容
+     * @param itemStyle 样式
+     * @param dismiss   是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(@StringRes int resId, DialogTextStyle itemStyle, boolean dismiss) {
+        return setConfirm(mContext.getResources().getString(resId), itemStyle, dismiss);
     }
 
     /**
@@ -595,6 +815,21 @@ public class DialogNormal {
     /**
      * 设置确定按钮内容
      *
+     * @param confirmText     确定按钮内容
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @param dismiss         是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(String confirmText, View.OnClickListener onClickListener, boolean dismiss, DialogTextStyle itemStyle) {
+        if (confirmText == null || itemStyle == null || onClickListener == null)
+            throw new NullPointerException();
+        return setConfirm(new DialogText.Builder(confirmText).setDialogTextStyle(itemStyle).setOnclickListener(onClickListener).build(), dismiss);
+    }
+
+    /**
+     * 设置确定按钮内容
+     *
      * @param resId           确定按钮内容
      * @param onClickListener 点击事件
      * @param itemStyle       样式
@@ -602,6 +837,19 @@ public class DialogNormal {
      */
     public DialogNormal setConfirm(@StringRes int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         return setConfirm(mContext.getResources().getString(resId), onClickListener, itemStyle);
+    }
+
+    /**
+     * 设置确定按钮内容
+     *
+     * @param resId           确定按钮内容
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @param dismiss         是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(@StringRes int resId, View.OnClickListener onClickListener, boolean dismiss, DialogTextStyle itemStyle) {
+        return setConfirm(mContext.getResources().getString(resId), onClickListener, dismiss, itemStyle);
     }
 
     /**
@@ -616,12 +864,44 @@ public class DialogNormal {
         if (confirm.getText() != null)
             mConfirm.setText(confirm.getText());
         if (confirm.getOnClickListener() != null)
+            mConfirm.setOnClickListener(v -> {
+                confirm.getOnClickListener().onClick(v);
+                dismiss();
+            });
+        else mConfirm.setOnClickListener(v -> dismiss());
+        if (confirm.getDialogTextStyle() != null) {
+            mConfirm.setTextSize(confirm.getDialogTextStyle().getTextSize());
+            mConfirm.setTextColor(confirm.getDialogTextStyle().getColor());
+            mConfirm.setTypeface(confirm.getDialogTextStyle().getTypeface());
+        }
+        mConfirmAutoDismiss = true;
+        mShowConfirm = true;
+        return this;
+    }
+
+    /**
+     * 设置确定按钮
+     *
+     * @param confirm 确定按钮
+     * @param dismiss 是否消失
+     * @return 弹窗对象
+     */
+    public DialogNormal setConfirm(DialogText confirm, boolean dismiss) {
+        if (confirm == null)
+            throw new NullPointerException("confirm can't be null!");
+        if (confirm.getText() != null)
+            mConfirm.setText(confirm.getText());
+        if (confirm.getOnClickListener() != null)
             mConfirm.setOnClickListener(confirm.getOnClickListener());
         if (confirm.getDialogTextStyle() != null) {
             mConfirm.setTextSize(confirm.getDialogTextStyle().getTextSize());
             mConfirm.setTextColor(confirm.getDialogTextStyle().getColor());
             mConfirm.setTypeface(confirm.getDialogTextStyle().getTypeface());
         }
+        if (dismiss)
+            mCancel.setOnClickListener(v -> dismiss());
+        mConfirmAutoDismiss = dismiss;
+        mShowConfirm = true;
         return this;
     }
 
@@ -649,7 +929,13 @@ public class DialogNormal {
     public DialogNormal setConfirmClickListener(View.OnClickListener onClickListener) {
         if (onClickListener == null)
             throw new NullPointerException();
-        mConfirm.setOnClickListener(onClickListener);
+        if (mConfirmAutoDismiss)
+            mConfirm.setOnClickListener(v -> {
+                dismiss();
+                onClickListener.onClick(v);
+            });
+        else
+            mConfirm.setOnClickListener(onClickListener);
         return this;
     }
 
@@ -775,5 +1061,12 @@ public class DialogNormal {
             mConfirm.setBackground(ContextCompat.getDrawable(mContext, R.drawable.dialog_normal_btn_single));
         }
         mDialog.show();
+    }
+
+    /**
+     * 消失
+     */
+    public void dismiss() {
+        mDialog.dismiss();
     }
 }

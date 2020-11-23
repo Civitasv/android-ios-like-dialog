@@ -19,6 +19,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.StringRes;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.civitasv.dialog.R;
@@ -53,6 +54,12 @@ public class DialogHud {
     private boolean mShowProgress = false;
     private boolean mAutomaticDisappear = false; // 自动消失
     private int mDisappearTime = 2000; // 自动消失时间 2s
+    private Mode mode = Mode.LOADING; // 显示模式 默认为loading
+
+    public enum Mode {
+        // 加载 圆环 成功 失败
+        LOADING, ANNULAR, SUCCESS, FAIL
+    }
 
     /**
      * 构造方法
@@ -340,7 +347,7 @@ public class DialogHud {
         if (labelDetail.getOnClickListener() != null)
             mDetailLabel.setOnClickListener(labelDetail.getOnClickListener());
         if (labelDetail.getDialogTextStyle() != null) {
-            mDetailLabel.setTextSize(UIUtil.dipToPx(mContext, labelDetail.getDialogTextStyle().getTextSize()));
+            mDetailLabel.setTextSize(labelDetail.getDialogTextStyle().getTextSize());
             mDetailLabel.setTextColor(labelDetail.getDialogTextStyle().getColor());
             mDetailLabel.setTypeface(labelDetail.getDialogTextStyle().getTypeface());
         }
@@ -383,6 +390,9 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setWidthRatio(float widthRatio) {
+        if (widthRatio < 0 || widthRatio > 1) {
+            throw new IllegalArgumentException("width ratio should not less than zero and bigger than one!");
+        }
         Window dialogWindow = mDialog.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.width = (int) (DisplayUtil.getInstance(mContext).getScreenWidth() * widthRatio);
@@ -397,6 +407,9 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setWidth(float width) {
+        if (width < 0 || width > DisplayUtil.getInstance(mContext).getScreenWidth()) {
+            throw new IllegalArgumentException("width should not less than zero and bigger than screen width!");
+        }
         Window dialogWindow = mDialog.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.width = UIUtil.dipToPx(mContext, width);
@@ -411,6 +424,9 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setHeightRatio(float heightRatio) {
+        if (heightRatio < 0 || heightRatio > 1) {
+            throw new IllegalArgumentException("width ratio should not less than zero and bigger than one!");
+        }
         Window dialogWindow = mDialog.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.height = (int) (DisplayUtil.getInstance(mContext).getScreenHeight() * heightRatio);
@@ -425,6 +441,9 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setHeight(float height) {
+        if (height < 0 || height > DisplayUtil.getInstance(mContext).getScreenHeight()) {
+            throw new IllegalArgumentException("height should not less than zero and bigger than screen height!");
+        }
         Window dialogWindow = mDialog.getWindow();
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.height = UIUtil.dipToPx(mContext, height);
@@ -452,7 +471,6 @@ public class DialogHud {
         if (drawable == null)
             throw new NullPointerException();
         mLoadingView.setImageDrawable(drawable);
-        loading();
         return this;
     }
 
@@ -515,6 +533,9 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setDimAmount(float amount) {
+        if (amount < 0 || amount > 1) {
+            throw new IllegalArgumentException("dim amount should not less than zero and bigger than one!");
+        }
         Window dialogWindow = mDialog.getWindow();
         dialogWindow.setDimAmount(amount);
         return this;
@@ -594,6 +615,8 @@ public class DialogHud {
      */
     public DialogHud setAutomaticDisappear(boolean automaticDisappear) {
         this.mAutomaticDisappear = automaticDisappear;
+        if (mode == Mode.ANNULAR)
+            mProgressView.setAutoDismiss(automaticDisappear);
         return this;
     }
 
@@ -604,35 +627,13 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setDisappearTime(int disappearTime) {
+        if (disappearTime < 0) {
+            throw new IllegalArgumentException("disappearTime should not less than zero!");
+        }
         this.mDisappearTime = disappearTime;
+        if (mode == Mode.ANNULAR)
+            mProgressView.setDismissTime(disappearTime);
         return this;
-    }
-
-    /**
-     * 设置弹窗显示加载成功
-     */
-    public void showSuccess() {
-        setLoadingImage(R.drawable.ic_load_success);
-        stopAnimation();
-        show();
-    }
-
-    /**
-     * 设置弹窗显示加载成功
-     */
-    public void showLoading() {
-        setLoadingImage(R.drawable.ic_progress_view);
-        startAnimation();
-        show();
-    }
-
-    /**
-     * 设置弹窗显示加载失败
-     */
-    public void showFail() {
-        setLoadingImage(R.drawable.ic_load_fail);
-        stopAnimation();
-        show();
     }
 
     /**
@@ -642,7 +643,10 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setProgress(float progress) {
-        mProgressView.setProgress(progress);
+        if (progress < 0 || progress > mProgressView.getMaxProgress()) {
+            throw new IllegalArgumentException("progress should not less than zero and bigger than maxProgress!");
+        }
+        mProgressView.setProgress(progress, this);
         return this;
     }
 
@@ -653,6 +657,9 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setMaxProgress(float maxProgress) {
+        if (maxProgress < 0) {
+            throw new IllegalArgumentException("maxProgress should not less than zero!");
+        }
         progress();
         mProgressView.setMaxProgress(maxProgress);
         return this;
@@ -687,7 +694,7 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setProgressTextColor(@ColorRes int resId) {
-        mProgressView.setProgressTextColor(resId);
+        mProgressView.setProgressTextColor(ContextCompat.getColor(mContext, resId));
         return this;
     }
 
@@ -698,6 +705,8 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setProgressTextColor(String color) {
+        if (color == null)
+            throw new NullPointerException();
         mProgressView.setProgressTextColor(Color.parseColor(color));
         return this;
     }
@@ -709,6 +718,8 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setProgressTextTypeface(Typeface typeface) {
+        if (typeface == null)
+            throw new NullPointerException();
         mProgressView.setProgressTextTypeface(typeface);
         return this;
     }
@@ -720,6 +731,8 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setProgressColor(String color) {
+        if (color == null)
+            throw new NullPointerException();
         mProgressView.setProgressColor(Color.parseColor(color));
         return this;
     }
@@ -731,7 +744,7 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setProgressColor(@ColorRes int resId) {
-        mProgressView.setProgressColor(resId);
+        mProgressView.setProgressColor(ContextCompat.getColor(mContext, resId));
         return this;
     }
 
@@ -742,6 +755,8 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setProgressBgColor(String color) {
+        if (color == null)
+            throw new NullPointerException();
         mProgressView.setProgressBgColor(Color.parseColor(color));
         return this;
     }
@@ -753,7 +768,7 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setProgressBgColor(@ColorRes int resId) {
-        mProgressView.setProgressBgColor(resId);
+        mProgressView.setProgressBgColor(ContextCompat.getColor(mContext, resId));
         return this;
     }
 
@@ -764,6 +779,8 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setProgressRadius(float progressRadius) {
+        if (progressRadius < 0)
+            throw new IllegalArgumentException("progress radius should not less than zero!");
         mProgressView.setProgressRadius(progressRadius);
         return this;
     }
@@ -775,6 +792,8 @@ public class DialogHud {
      * @return 弹窗对象
      */
     public DialogHud setProgressWidth(float progressWidth) {
+        if (progressWidth < 0)
+            throw new IllegalArgumentException("progress width  should not less than zero!");
         mProgressView.setProgressWidth(progressWidth);
         return this;
     }
@@ -790,6 +809,30 @@ public class DialogHud {
         return this;
     }
 
+    /**
+     * 设置显示模式
+     *
+     * @param mode 显示模式 {@link Mode}
+     * @return 弹窗对象
+     */
+    public DialogHud setMode(Mode mode) {
+        this.mode = mode;
+        switch (mode) {
+            case LOADING:
+                showLoading();
+                break;
+            case ANNULAR:
+                progress();
+                break;
+            case FAIL:
+                showFail();
+                break;
+            case SUCCESS:
+                showSuccess();
+                break;
+        }
+        return this;
+    }
 
     /**
      * 展示圆形进度条
@@ -821,19 +864,51 @@ public class DialogHud {
      * 设置可见性，并展示该弹窗
      */
     public void show() {
-        mLabel.setVisibility(mShowLabel ? View.VISIBLE : View.GONE);
-        mDetailLabel.setVisibility(mShowDetailLabel ? View.VISIBLE : View.GONE);
-        mLoadingView.setVisibility(mShowLoading ? View.VISIBLE : View.GONE);
-        mProgressView.setVisibility(mShowProgress ? View.VISIBLE : View.GONE);
+        setVisibility();
         if (!mDialog.isShowing())
             mDialog.show();
-        if (mAutomaticDisappear) {
-            new Timer().schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    mDialog.dismiss();
-                }
-            }, mDisappearTime);
-        }
+        if (mAutomaticDisappear)
+            if (mode != Mode.ANNULAR) {
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        mDialog.dismiss();
+                    }
+                }, mDisappearTime);
+            }
+    }
+
+    /**
+     * 消失
+     */
+    public void dismiss() {
+        mDialog.dismiss();
+    }
+
+    /**
+     * 设置弹窗显示加载成功
+     */
+    private void showSuccess() {
+        loading();
+        setLoadingImage(R.drawable.ic_load_success);
+        stopAnimation();
+    }
+
+    /**
+     * 设置弹窗显示加载成功
+     */
+    private void showLoading() {
+        loading();
+        setLoadingImage(R.drawable.ic_progress_view);
+        startAnimation();
+    }
+
+    /**
+     * 设置弹窗显示加载失败
+     */
+    private void showFail() {
+        loading();
+        setLoadingImage(R.drawable.ic_load_fail);
+        stopAnimation();
     }
 }

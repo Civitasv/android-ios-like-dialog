@@ -1,5 +1,6 @@
 package com.civitasv.ioslike.view;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -13,11 +14,16 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
+import androidx.annotation.ColorRes;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.civitasv.dialog.R;
+import com.civitasv.ioslike.dialog.DialogHud;
 import com.civitasv.ioslike.util.UIUtil;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -36,8 +42,10 @@ public class ProgressView extends View {
     private float maxProgress;    // 最大进度
     private float progress;    // 当前进度
     private int direction;
+    private int dismissTime;
     private final RectF oval;
     private boolean showProgressText = true;
+    private boolean autoDismiss = true;
 
     public enum Direction {
         LEFT(0, 180.0f),
@@ -111,6 +119,7 @@ public class ProgressView extends View {
         paint = new Paint();
         oval = new RectF();
         rect = new Rect();
+        dismissTime = 500;
     }
 
     @Override
@@ -182,6 +191,20 @@ public class ProgressView extends View {
             throw new IllegalArgumentException("maxProgress should not be less than 0");
         }
         this.maxProgress = maxProgress;
+    }
+
+    // 设置是否自动消失
+    public void setAutoDismiss(boolean autoDismiss) {
+        this.autoDismiss = autoDismiss;
+    }
+
+    /**
+     * 设置弹窗自动消失时间
+     *
+     * @param dismissTime 自动消失时间 单位: ms
+     */
+    public void setDismissTime(int dismissTime) {
+        this.dismissTime = dismissTime;
     }
 
     public synchronized float getProgress() {
@@ -279,7 +302,7 @@ public class ProgressView extends View {
     }
 
     //加锁保证线程安全,能在线程中使用
-    public synchronized void setProgress(float progress) {
+    public synchronized void setProgress(float progress, DialogHud dialogHud) {
         if (progress < 0) {
             throw new IllegalArgumentException("progress should not be less than 0");
         }
@@ -287,15 +310,43 @@ public class ProgressView extends View {
             progress = maxProgress;
         }
         if (isShown() && this.progress != progress)
-            startAnim(this.progress, progress);
+            startAnim(this.progress, progress, dialogHud);
         this.progress = progress;
     }
 
-    private void startAnim(float startProgress, float endProgress) {
+    private void startAnim(float startProgress, float endProgress, DialogHud dialogHud) {
         ValueAnimator animator = ObjectAnimator.ofFloat(startProgress, endProgress);
         animator.addUpdateListener(animation -> {
             this.progress = (float) animation.getAnimatedValue();
             postInvalidate();
+        });
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                if (endProgress >= maxProgress && autoDismiss) {
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            dialogHud.dismiss();
+                        }
+                    }, dismissTime);
+                }
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
         });
         animator.setStartDelay(500);
         animator.setDuration(2000);

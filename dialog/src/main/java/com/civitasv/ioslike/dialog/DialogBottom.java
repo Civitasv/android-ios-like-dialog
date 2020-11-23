@@ -38,7 +38,8 @@ public class DialogBottom {
     private final RecyclerView mRecyclerView;
     private DialogBottomAdapter mAdapter;
     private boolean mShowTitle = false; // 是否展示title
-    private boolean mShowCancel = true; // 是否展示底部取消按钮
+    private boolean mShowCancel = false; // 是否展示底部取消按钮
+    private boolean mCancelAutoDismiss = true;
 
     public DialogBottom(Context context) {
         this(context, null);
@@ -367,11 +368,35 @@ public class DialogBottom {
     /**
      * 设置取消按钮内容
      *
+     * @param cancelText 取消按钮字符串内容
+     * @param dismiss    点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogBottom setCancel(String cancelText, boolean dismiss) {
+        if (cancelText == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText.Builder(cancelText).build(), dismiss);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
      * @param resId 取消按钮res id
      * @return 弹窗对象
      */
     public DialogBottom setCancel(@StringRes int resId) {
         return setCancel(mContext.getResources().getString(resId));
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
+     * @param resId   取消按钮res id
+     * @param dismiss 点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogBottom setCancel(@StringRes int resId, boolean dismiss) {
+        return setCancel(mContext.getResources().getString(resId), dismiss);
     }
 
     /**
@@ -390,12 +415,38 @@ public class DialogBottom {
     /**
      * 设置取消按钮内容
      *
+     * @param cancelText      标题
+     * @param onClickListener 点击事件
+     * @param dismiss         点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogBottom setCancel(String cancelText, View.OnClickListener onClickListener, boolean dismiss) {
+        if (cancelText == null || onClickListener == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText.Builder(cancelText).setOnclickListener(onClickListener).build(), dismiss);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
      * @param resId           标题
      * @param onClickListener 点击事件
      * @return 弹窗对象
      */
     public DialogBottom setCancel(@StringRes int resId, View.OnClickListener onClickListener) {
         return setCancel(mContext.getResources().getString(resId), onClickListener);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
+     * @param resId           标题
+     * @param onClickListener 点击事件
+     * @param dismiss         点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogBottom setCancel(@StringRes int resId, View.OnClickListener onClickListener, boolean dismiss) {
+        return setCancel(mContext.getResources().getString(resId), onClickListener, dismiss);
     }
 
     /**
@@ -414,12 +465,38 @@ public class DialogBottom {
     /**
      * 设置取消按钮内容
      *
+     * @param cancelText 标题
+     * @param itemStyle  样式
+     * @param dismiss    点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogBottom setCancel(String cancelText, DialogTextStyle itemStyle, boolean dismiss) {
+        if (cancelText == null || itemStyle == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText.Builder(cancelText).setDialogTextStyle(itemStyle).build(), dismiss);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
      * @param resId     标题
      * @param itemStyle 样式
      * @return 弹窗对象
      */
     public DialogBottom setCancel(@StringRes int resId, DialogTextStyle itemStyle) {
         return setCancel(mContext.getResources().getString(resId), itemStyle);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
+     * @param resId     标题
+     * @param itemStyle 样式
+     * @param dismiss   点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogBottom setCancel(@StringRes int resId, DialogTextStyle itemStyle, boolean dismiss) {
+        return setCancel(mContext.getResources().getString(resId), itemStyle, dismiss);
     }
 
     /**
@@ -439,6 +516,21 @@ public class DialogBottom {
     /**
      * 设置取消按钮内容
      *
+     * @param cancelText      标题
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @param dismiss         点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogBottom setCancel(String cancelText, View.OnClickListener onClickListener, boolean dismiss, DialogTextStyle itemStyle) {
+        if (cancelText == null || itemStyle == null || onClickListener == null)
+            throw new NullPointerException();
+        return setCancel(new DialogText.Builder(cancelText).setDialogTextStyle(itemStyle).setOnclickListener(onClickListener).build(), dismiss);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
      * @param resId           标题
      * @param onClickListener 点击事件
      * @param itemStyle       样式
@@ -446,6 +538,19 @@ public class DialogBottom {
      */
     public DialogBottom setCancel(@StringRes int resId, View.OnClickListener onClickListener, DialogTextStyle itemStyle) {
         return setCancel(mContext.getResources().getString(resId), onClickListener, itemStyle);
+    }
+
+    /**
+     * 设置取消按钮内容
+     *
+     * @param resId           标题
+     * @param onClickListener 点击事件
+     * @param itemStyle       样式
+     * @param dismiss         点击是否消失
+     * @return 弹窗对象
+     */
+    public DialogBottom setCancel(@StringRes int resId, View.OnClickListener onClickListener, boolean dismiss, DialogTextStyle itemStyle) {
+        return setCancel(mContext.getResources().getString(resId), onClickListener, dismiss, itemStyle);
     }
 
     /**
@@ -460,12 +565,44 @@ public class DialogBottom {
         if (cancel.getText() != null)
             mCancel.setText(cancel.getText());
         if (cancel.getOnClickListener() != null)
+            mCancel.setOnClickListener(v -> {
+                cancel.getOnClickListener().onClick(v);
+                dismiss();
+            });
+        else mCancel.setOnClickListener(v -> dismiss());
+        if (cancel.getDialogTextStyle() != null) {
+            mCancel.setTextSize(cancel.getDialogTextStyle().getTextSize());
+            mCancel.setTextColor(cancel.getDialogTextStyle().getColor());
+            mCancel.setTypeface(cancel.getDialogTextStyle().getTypeface());
+        }
+        mShowCancel = true;
+        mCancelAutoDismiss = true;
+        return this;
+    }
+
+    /**
+     * 设置取消按钮
+     *
+     * @param cancel  取消按钮
+     * @param dismiss 是否消失
+     * @return 弹窗对象
+     */
+    public DialogBottom setCancel(DialogText cancel, boolean dismiss) {
+        if (cancel == null)
+            throw new NullPointerException("cancel can't be null!");
+        if (cancel.getText() != null)
+            mCancel.setText(cancel.getText());
+        if (cancel.getOnClickListener() != null)
             mCancel.setOnClickListener(cancel.getOnClickListener());
         if (cancel.getDialogTextStyle() != null) {
             mCancel.setTextSize(cancel.getDialogTextStyle().getTextSize());
             mCancel.setTextColor(cancel.getDialogTextStyle().getColor());
             mCancel.setTypeface(cancel.getDialogTextStyle().getTypeface());
         }
+        if (dismiss)
+            mCancel.setOnClickListener(v -> dismiss());
+        mCancelAutoDismiss = dismiss;
+        mShowCancel = true;
         return this;
     }
 
@@ -493,7 +630,13 @@ public class DialogBottom {
     public DialogBottom setCancelClickListener(View.OnClickListener onClickListener) {
         if (onClickListener == null)
             throw new NullPointerException();
-        mCancel.setOnClickListener(onClickListener);
+        if (mCancelAutoDismiss)
+            mCancel.setOnClickListener(v -> {
+                onClickListener.onClick(v);
+                dismiss();
+            });
+        else
+            mCancel.setOnClickListener(onClickListener);
         return this;
     }
 
